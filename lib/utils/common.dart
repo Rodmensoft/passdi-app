@@ -40,6 +40,9 @@ Decoration categoryDecoration(BuildContext context,
   );
 }
 
+BorderRadius curvedContainerBorderRadius =
+    BorderRadius.only(bottomLeft: Radius.circular(80.r));
+
 List<LanguageDataModel> languageList() {
   return [
     LanguageDataModel(
@@ -57,8 +60,8 @@ List<LanguageDataModel> languageList() {
   ];
 }
 
-TextStyle defaultTextFieldStyle =
-    TextStyle(fontWeight: FontWeight.w500, fontSize: 16.sp);
+TextStyle defaultTextFieldStyle = TextStyle(
+    fontWeight: FontWeight.w500, fontSize: 16.sp, fontStyle: FontStyle.italic);
 
 TextStyle defaultHintTextFieldStyle = TextStyle(
   fontWeight: FontWeight.w500,

@@ -38,13 +38,7 @@ const deactivatedCard = Color(0xFFF7F7F7);
 const defaultStatus = Color(0xFF3CAE5C);
 const extraChargesColor = Color(0xFFFD6922);
 
-const add_booking = Color(0xFFEA2F2F);
-const assigned_booking = Color(0xFFFD6922);
-const transfer_booking = Color(0xFF00968A);
-const update_booking_status = Color(0xFF3CAE5C);
-const cancel_booking = Color(0xFFC41520);
-const payment_message_status = Color(0xFFFFBD49);
-const defaultActivityStatus = Color(0xFF3CAE5C);
+const avatarBorder = Color(0xFF95C623);
 
 List<Color> packageOfferColors = [
   mistyRose,

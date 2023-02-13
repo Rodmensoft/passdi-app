@@ -1,4 +1,4 @@
-import 'package:app_viajeros/app/presentation/modules/splash/view/splash_view.dart';
+import 'package:app_viajeros/app/ui/pages/splash_page/splash_page.dart';
 import 'package:app_viajeros/locale/base_language.dart';
 import 'package:app_viajeros/storage/app_storage.dart';
 import 'package:app_viajeros/utils/colors.dart';
@@ -7,8 +7,11 @@ import 'package:app_viajeros/utils/configs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import 'app/routes/app_pages.dart';
+import 'app/routes/app_routes.dart';
 import 'app_theme.dart';
 import 'locale/applocalizations.dart';
 
@@ -37,11 +40,14 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return MaterialApp(
+          return GetMaterialApp(
             title: 'Flutter Demo',
             supportedLocales: LanguageDataModel.languageLocales(),
             theme: AppTheme.lightTheme(color: primaryColor),
-            home: const SplashView(),
+            home: const SplashPage(),
+            initialBinding: SplashBinding(),
+            initialRoute: AppRoutes.SPLASH,
+            getPages: AppPages.pages,
             localizationsDelegates: const [
               AppLocalizations(),
               GlobalMaterialLocalizations.delegate,
