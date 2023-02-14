@@ -16,30 +16,107 @@ class UsersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final UsersController controller = Get.find();
     const color = Color(0xff4A4A4A);
-    return Column(
-      children: [
-        Container(
-          color: color,
-          width: double.infinity,
-          child: const SafeArea(child: SizedBox()),
-        ),
-        Stack(
-          children: [
-            ...controller.users.asMap().entries.map((entry) {
-              int index = entry.key;
-              var user = entry.value;
-              return Text("$index: ${user.name}");
-            }),
-            UsersCurvedBlackContainer(
-              controller: controller,
+    return SafeArea(
+      child: Column(
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        229.heightSP,
+                        ...controller.users.asMap().entries.map((entry) {
+                          int index = entry.key;
+                          var user = entry.value;
+                          return UsersVerticalListContainer(
+                              index: index, user: user);
+                        }),
+                      ],
+                    ),
+                  ),
+                ),
+                Stack(
+                  children: [
+                    UsersCurvedBlackContainer(
+                      controller: controller,
+                    ),
+                    const ScoreCurvedContainer(
+                      color: color,
+                      textColor: Colors.white,
+                    ),
+                    Container(
+                      color: color,
+                      width: double.infinity,
+                      child: const SafeArea(child: SizedBox()),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            const ScoreCurvedContainer(
-              color: color,
-              textColor: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class UsersVerticalListContainer extends StatelessWidget {
+  const UsersVerticalListContainer({
+    super.key,
+    required this.index,
+    required this.user,
+  });
+
+  final int index;
+  final UsersModel user;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 37.sp, vertical: 30.sp),
+      margin: EdgeInsets.only(bottom: 1.sp),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: curvedContainerBorderRadius,
+          boxShadow: [
+            BoxShadow(
+                color: const Color(0xffE7E4E9), offset: Offset(-1.sp, 1.sp))
+          ]),
+      width: double.infinity,
+      height: 101.sp,
+      child: Row(
+        children: [
+          UserAvatar(image: user.image),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  user.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14.sp,
+                    color: Colors.black,
+                  ),
+                ),
+                Text(
+                  user.country,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 12.sp,
+                    color: Colors.black.withOpacity(0.6),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

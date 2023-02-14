@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+export 'package:flutter_screenutil/flutter_screenutil.dart';
+
 extension IntExtensions on int? {
   /// Validate given int is not null and returns given value if null.
   int validate({int value = 0}) {

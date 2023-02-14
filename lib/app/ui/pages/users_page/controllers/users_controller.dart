@@ -33,7 +33,6 @@ class UsersController extends GetxController {
             image: 'https://picsum.photos/id/${index + 9}/300/300'),
       ),
     );
-    print(users);
   }
 }
 

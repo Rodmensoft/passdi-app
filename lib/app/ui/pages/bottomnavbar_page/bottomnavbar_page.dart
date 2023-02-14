@@ -21,8 +21,19 @@ class BottomNavbarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final BottomNavbarController controller = Get.find();
     return Obx(() => Scaffold(
-          body: _widgets.elementAt(controller.tabIndex.value),
-          bottomNavigationBar: CustomBottomNavBar(controller: controller),
+          body: Stack(
+            children: [
+              _widgets.elementAt(controller.tabIndex.value),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: CustomBottomNavBar(controller: controller),
+              ),
+            ],
+          ),
+
+          // bottomNavigationBar: ,
         ));
   }
 
@@ -48,11 +59,12 @@ class CustomBottomNavBar extends StatelessWidget {
     return CustomPaint(
       painter: RPSCustomPainter(),
       child: SizedBox(
+        height: 105.97.sp,
         width: double.infinity,
         child: Stack(
           children: [
             Opacity(
-              opacity: 0.4,
+              opacity: 1,
               child: Image.asset(
                 Assets.assetsMiscBottomNavTrazado,
                 width: double.infinity,

@@ -9,9 +9,6 @@ class AppTheme {
   //
   AppTheme._();
 
-  static TextStyle defaultItalicTextStyle = TextStyle(
-      fontFamily: GoogleFonts.montserrat().fontFamily,
-      fontStyle: FontStyle.italic);
   static ThemeData lightTheme({Color? color}) => ThemeData(
         primarySwatch: createMaterialColor(color ?? primaryColor),
         primaryColor: color ?? primaryColor,
@@ -24,21 +21,9 @@ class AppTheme {
             mouseCursor: MaterialStateMouseCursor.clickable),
         iconTheme: const IconThemeData(color: appTextSecondaryColor),
         textTheme: GoogleFonts.montserratTextTheme().copyWith(
-          displayLarge: defaultItalicTextStyle,
-          displayMedium: defaultItalicTextStyle,
-          displaySmall: defaultItalicTextStyle,
-          headlineLarge: defaultItalicTextStyle,
-          headlineMedium: defaultItalicTextStyle,
-          headlineSmall: defaultItalicTextStyle,
-          titleLarge: defaultItalicTextStyle,
-          titleMedium: defaultItalicTextStyle,
-          titleSmall: defaultItalicTextStyle,
-          bodyLarge: defaultItalicTextStyle,
-          bodyMedium: defaultItalicTextStyle,
-          bodySmall: defaultItalicTextStyle,
-          labelLarge: defaultItalicTextStyle,
-          labelMedium: defaultItalicTextStyle,
-          labelSmall: defaultItalicTextStyle,
+          titleMedium: defaultTextFieldStyle,
+          titleLarge: defaultTextFieldStyle,
+          titleSmall: defaultTextFieldStyle,
         ),
         dialogBackgroundColor: Colors.white,
         unselectedWidgetColor: primaryColor,
@@ -93,23 +78,8 @@ class AppTheme {
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             backgroundColor: scaffoldSecondaryDark),
         iconTheme: const IconThemeData(color: Colors.white),
-        textTheme: GoogleFonts.montserratTextTheme().copyWith(
-          displayLarge: defaultItalicTextStyle,
-          displayMedium: defaultItalicTextStyle,
-          displaySmall: defaultItalicTextStyle,
-          headlineLarge: defaultItalicTextStyle,
-          headlineMedium: defaultItalicTextStyle,
-          headlineSmall: defaultItalicTextStyle,
-          titleLarge: defaultItalicTextStyle,
-          titleMedium: defaultItalicTextStyle,
-          titleSmall: defaultItalicTextStyle,
-          bodyLarge: defaultItalicTextStyle,
-          bodyMedium: defaultItalicTextStyle,
-          bodySmall: defaultItalicTextStyle,
-          labelLarge: defaultItalicTextStyle,
-          labelMedium: defaultItalicTextStyle,
-          labelSmall: defaultItalicTextStyle,
-        ),
+        textTheme: GoogleFonts.montserratTextTheme()
+            .copyWith(titleMedium: defaultTextFieldStyle),
         dialogBackgroundColor: scaffoldSecondaryDark,
         unselectedWidgetColor: Colors.white60,
         // useMaterial3: true,

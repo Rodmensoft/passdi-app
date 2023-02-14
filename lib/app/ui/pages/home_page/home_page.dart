@@ -22,7 +22,9 @@ class HomePage extends StatelessWidget {
             children: const [
               UserStatsCurvedContainer(),
               ProfileCurvedContainer(),
-              ScoreCurvedContainer(),
+              ScoreCurvedContainer(
+                hasBorder: true,
+              ),
             ],
           ),
           23.heightSP,
@@ -147,7 +149,6 @@ class ProfileCurvedContainer extends StatelessWidget {
                   children: <Widget>[
                     const Text(
                       'Camila Lopez',
-                      style: TextStyle(),
                     ),
                     Text(
                       'Lorem ipsum',
@@ -174,10 +175,12 @@ class ScoreCurvedContainer extends StatelessWidget {
     super.key,
     this.color = const Color(0xffFAFAFA),
     this.textColor,
+    this.hasBorder = false,
   });
 
   final Color color;
   final Color? textColor;
+  final bool hasBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -200,10 +203,12 @@ class ScoreCurvedContainer extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  width: 1.sp,
-                  color: cardColor,
-                ),
+                border: hasBorder
+                    ? Border.all(
+                        width: 1.sp,
+                        color: cardColor,
+                      )
+                    : null,
               ),
               child: Text.rich(
                 TextSpan(

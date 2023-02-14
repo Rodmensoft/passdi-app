@@ -31,9 +31,10 @@ const in_progress = Color(0xFFFD6922);
 const hold = Color(0xFFFFBD49);
 const cancelled = Color(0xffFF0303);
 const rejected = Color(0xFF8D0E06);
-const failed = Color(0xFFC41520);
+const failed = Color(0xFFF61067);
 const completed = Color(0xFF00C377);
 const deactivatedText = Color(0xFF998FA2);
+
 const deactivatedCard = Color(0xFFF7F7F7);
 const defaultStatus = Color(0xFF3CAE5C);
 const extraChargesColor = Color(0xFFFD6922);
