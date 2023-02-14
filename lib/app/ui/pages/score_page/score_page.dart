@@ -17,98 +17,101 @@ class ScorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ScoreController controller = Get.find<ScoreController>();
 
-    return SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Column(
-                            children: [
-                              SafeArea(child: 190.heightSP),
-                              // ...controller.places.asMap().entries.map((entry) {
-                              //   int index = entry.key;
-                              //   var user = entry.value;
-                              //   return UsersVerticalListContainer(
-                              //       index: index, user: user);
-                              // }),
-                              LocationCurvedContainer(
-                                height: 100.sp,
-                                to: 'Rodríguez Ballón',
-                                from: 'Intl Jorge Chávez',
-                                score: 25,
-                                scoreColor: verifyAcColor,
-                              ),
-                              LocationCurvedContainer(
-                                height: 100.sp,
-                                to: 'Rodríguez Ballón',
-                                from: 'Intl Jorge Chávez',
-                                score: 25,
-                                scoreColor: verifyAcColor,
-                              ),
-                              LocationCurvedContainer(
-                                height: 100.sp,
-                                to: 'Rodríguez Ballón',
-                                from: 'Intl Jorge Chávez',
-                                score: 0,
-                                scoreColor: verifyAcColor,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      AppButton(
-                        height: 40.sp,
-                        width: 225.sp,
-                        disabledColor: deactivatedCard,
-                        child: Text(
-                          'SOLICITAR PUNTOS',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12.sp,
-                            color: Colors.black.withOpacity(0.2),
-                          ),
-                        ),
-                      ),
-                      46.heightSP,
-                      105.heightSP,
-                    ],
-                  ),
-                ),
-                Stack(
+    return Column(
+      children: [
+        Container(
+          color: verifyAcColor,
+          width: double.infinity,
+          child: const SafeArea(child: SizedBox()),
+        ),
+        Expanded(
+          child: Stack(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Column(
                   children: [
-                    LocationCurvedContainer(
-                      color: verifyAcColor,
-                      height: 191.sp,
-                      textColor: Colors.white,
-                      to: 'Rodríguez Ballón',
-                      from: 'Intl Jorge Chávez',
-                      score: 25,
-                      bottomBorder: false,
+                    Expanded(
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            SafeArea(child: 190.heightSP),
+                            // ...controller.places.asMap().entries.map((entry) {
+                            //   int index = entry.key;
+                            //   var user = entry.value;
+                            //   return UsersVerticalListContainer(
+                            //       index: index, user: user);
+                            // }),
+                            LocationCurvedContainer(
+                              height: 100.sp,
+                              to: 'Rodríguez Ballón',
+                              from: 'Intl Jorge Chávez',
+                              score: 25,
+                              scoreColor: verifyAcColor,
+                            ),
+                            LocationCurvedContainer(
+                              height: 100.sp,
+                              to: 'Rodríguez Ballón',
+                              from: 'Intl Jorge Chávez',
+                              score: 25,
+                              scoreColor: verifyAcColor,
+                            ),
+                            LocationCurvedContainer(
+                              height: 100.sp,
+                              to: 'Rodríguez Ballón',
+                              from: 'Intl Jorge Chávez',
+                              score: 0,
+                              scoreColor: verifyAcColor,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    ScoreCurvedContainer(
-                      color: Colors.white.withOpacity(0.3),
-                      textColor: Colors.white,
+                    AppButton(
+                      height: 40.sp,
+                      width: 225.sp,
+                      disabledColor: deactivatedCard,
+                      child: Text(
+                        'SOLICITAR PUNTOS',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12.sp,
+                          color: Colors.black.withOpacity(0.2),
+                        ),
+                      ),
                     ),
-                    Container(
-                      color: const Color(0xff4BC0E8),
-                      width: double.infinity,
-                      child: const SafeArea(child: SizedBox()),
-                    ),
+                    46.heightSP,
+                    105.heightSP,
                   ],
                 ),
-              ],
-            ),
+              ),
+              Stack(
+                children: [
+                  LocationCurvedContainer(
+                    color: verifyAcColor,
+                    height: 191.sp,
+                    textColor: Colors.white,
+                    to: 'Rodríguez Ballón',
+                    from: 'Intl Jorge Chávez',
+                    score: 25,
+                    bottomBorder: false,
+                  ),
+                  ScoreCurvedContainer(
+                    color: Colors.white.withOpacity(0.3),
+                    textColor: Colors.white,
+                  ),
+                  Container(
+                    color: const Color(0xff4BC0E8),
+                    width: double.infinity,
+                    child: const SafeArea(child: SizedBox()),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

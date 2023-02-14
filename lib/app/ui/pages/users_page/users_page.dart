@@ -1,6 +1,5 @@
 import 'package:app_viajeros/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import './controllers/users_controller.dart';
@@ -16,50 +15,53 @@ class UsersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final UsersController controller = Get.find();
     const color = Color(0xff4A4A4A);
-    return SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        229.heightSP,
-                        ...controller.users.asMap().entries.map((entry) {
-                          int index = entry.key;
-                          var user = entry.value;
-                          return UsersVerticalListContainer(
-                              index: index, user: user);
-                        }),
-                      ],
-                    ),
+    return Column(
+      children: [
+        Container(
+          color: color,
+          width: double.infinity,
+          child: const SafeArea(child: SizedBox()),
+        ),
+        Expanded(
+          child: Stack(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      229.heightSP,
+                      ...controller.users.asMap().entries.map((entry) {
+                        int index = entry.key;
+                        var user = entry.value;
+                        return UsersVerticalListContainer(
+                            index: index, user: user);
+                      }),
+                    ],
                   ),
                 ),
-                Stack(
-                  children: [
-                    UsersCurvedBlackContainer(
-                      controller: controller,
-                    ),
-                    const ScoreCurvedContainer(
-                      color: color,
-                      textColor: Colors.white,
-                    ),
-                    Container(
-                      color: color,
-                      width: double.infinity,
-                      child: const SafeArea(child: SizedBox()),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              ),
+              Stack(
+                children: [
+                  UsersCurvedBlackContainer(
+                    controller: controller,
+                  ),
+                  const ScoreCurvedContainer(
+                    color: color,
+                    textColor: Colors.white,
+                  ),
+                  Container(
+                    color: color,
+                    width: double.infinity,
+                    child: const SafeArea(child: SizedBox()),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
