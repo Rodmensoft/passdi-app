@@ -31,14 +31,13 @@ class UsersPage extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
-                      SafeArea(child: 229.heightSP),
+                      229.heightSP,
                       ...controller.users.asMap().entries.map((entry) {
                         int index = entry.key;
                         var user = entry.value;
                         return UsersVerticalListContainer(
                             index: index, user: user);
                       }),
-                      105.heightSP,
                     ],
                   ),
                 ),
