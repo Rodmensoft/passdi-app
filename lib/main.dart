@@ -4,6 +4,7 @@ import 'package:app_viajeros/storage/app_storage.dart';
 import 'package:app_viajeros/utils/colors.dart';
 import 'package:app_viajeros/utils/common.dart';
 import 'package:app_viajeros/utils/configs.dart';
+import 'package:app_viajeros/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +23,7 @@ Languages? languages;
 //endregion
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DependencyInjection.init();
 
   await initialize();
 

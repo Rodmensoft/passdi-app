@@ -1,8 +1,7 @@
-import 'package:app_viajeros/app/routes/app_routes.dart';
+import 'package:app_viajeros/app/ui/pages/login_page/controllers/login_controller.dart';
 import 'package:app_viajeros/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
@@ -21,51 +20,56 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
+      body: Stack(
         children: [
-          Stack(
-            children: const [
-              LoginTopBlackContainer(),
-              LoginTopWhiteContainer()
+          Column(
+            children: [
+              Stack(
+                children: const [
+                  LoginTopBlackContainer(),
+                ],
+              ),
+              const Spacer(),
+              Container(
+                constraints: BoxConstraints(
+                  maxWidth: 322.sp,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Container(
+                      color: const Color(0xff998FA2).withOpacity(0.3),
+                      height: 1.sp,
+                    )),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 17.sp),
+                      child: Text('o',
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            color: Colors.black,
+                          )),
+                    ),
+                    Expanded(
+                        child: Container(
+                      color: const Color(0xff998FA2).withOpacity(0.3),
+                      height: 1.sp,
+                    )),
+                  ],
+                ),
+              ),
+              28.heightSP,
+              SocialMediaButton(
+                name: 'facebook',
+                width: 279.sp,
+              ),
+              SocialMediaButton(
+                name: 'google',
+                width: 279.sp,
+              ),
+              const Spacer(),
             ],
           ),
-          28.heightSP,
-          Container(
-            constraints: BoxConstraints(
-              maxWidth: 322.sp,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                    child: Container(
-                  color: const Color(0xff998FA2).withOpacity(0.3),
-                  height: 1.sp,
-                )),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 17.sp),
-                  child: Text('o',
-                      style: TextStyle(
-                        fontSize: 10.sp,
-                        color: Colors.black,
-                      )),
-                ),
-                Expanded(
-                    child: Container(
-                  color: const Color(0xff998FA2).withOpacity(0.3),
-                  height: 1.sp,
-                )),
-              ],
-            ),
-          ),
-          28.heightSP,
-          SocialMediaButton(
-            name: 'facebook',
-            width: 279.sp,
-          ),
-          SocialMediaButton(
-            name: 'google',
-            width: 279.sp,
-          ),
+          const LoginTopWhiteContainer()
         ],
       ),
     );
@@ -114,53 +118,61 @@ class LoginTopWhiteContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LoginController controller = Get.find();
     return Positioned.fill(
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Stack(
           children: [
             Column(
               children: [
                 140.heightSP,
-                FormWhiteCardContainer(
-                  height: 259.sp,
-                  children: [
-                    const Spacer(),
-                    AppTextField(
-                      textFieldType: TextFieldType.EMAIL,
-                      textStyle: defaultTextFieldStyle,
-                      decoration: const InputDecoration(
-                        hintText: 'Email',
-                      ),
+                Form(
+                  key: controller.formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: FormWhiteCardContainer(
+                    constraints: BoxConstraints(
+                      minHeight: 280.sp,
                     ),
-                    AppTextField(
-                      textFieldType: TextFieldType.PASSWORD,
-                      decoration: const InputDecoration(
-                        hintText: 'Clave',
-                        border: UnderlineInputBorder(),
-                      ),
-                      textStyle: defaultTextFieldStyle,
-                    ),
-                    SizedBox(height: 24.sp),
-                    SizedBox(
-                      width: 180.sp,
-                      child: AppButton(
-                        shapeBorder: const StadiumBorder(),
-                        elevation: 0,
-                        color: Theme.of(context).primaryColor,
-                        onTap: () {
-                          // BottomNavbarView().launch(context, isNewTask: true);
-                          Get.offAllNamed(AppRoutes.BOTTOM);
-                        },
-                        text: languages!.tosignin,
-                        textStyle: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12.sp,
-                          color: Colors.white,
+                    children: [
+                      25.heightSP,
+                      AppTextField(
+                        controller: controller.emailCtrl,
+                        textFieldType: TextFieldType.EMAIL,
+                        textStyle: defaultTextFieldStyle,
+                        errorInvalidEmail: 'El email no es válido',
+                        decoration: const InputDecoration(
+                          hintText: 'Email',
                         ),
                       ),
-                    ),
-                    SizedBox(height: 20.sp),
-                  ],
+                      AppTextField(
+                        controller: controller.passCtrl,
+                        textFieldType: TextFieldType.PASSWORD,
+                        decoration: const InputDecoration(
+                          hintText: 'Clave',
+                          border: UnderlineInputBorder(),
+                        ),
+                        textStyle: defaultTextFieldStyle,
+                      ),
+                      SizedBox(height: 24.sp),
+                      SizedBox(
+                        width: 180.sp,
+                        child: AppButton(
+                          shapeBorder: const StadiumBorder(),
+                          elevation: 0,
+                          color: Theme.of(context).primaryColor,
+                          onTap: controller.login,
+                          text: languages!.tosignin,
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12.sp,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20.sp),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -169,10 +181,11 @@ class LoginTopWhiteContainer extends StatelessWidget {
                 children: [
                   125.heightSP,
                   Center(
-                      child: Logo(
-                    size: 68.sp,
-                    blur: false,
-                  )),
+                    child: Logo(
+                      size: 68.sp,
+                      blur: false,
+                    ),
+                  ),
                 ],
               ),
             ),

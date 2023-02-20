@@ -31,7 +31,8 @@ abstract class AppStorageBase with Store {
 
     // errorMessage = languages!.pleaseTryAgain;
     // errorSomethingWentWrong = languages!.somethingWentWrong;
-    // errorThisFieldRequired = languages!.hintRequired;
+    errorThisFieldRequired = 'Este campo es requerido';
+
     // errorInternetNotAvailable = languages!.internetNotAvailable;
   }
 }

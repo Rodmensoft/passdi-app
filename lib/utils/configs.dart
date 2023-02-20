@@ -6,7 +6,8 @@ const APP_NAME = 'App Viajeros';
 const APP_NAME_TAG_LINE = 'lorem ipsum viajeros';
 const DEFAULT_LANGUAGE = 'es';
 
-const DOMAIN_URL = 'https://practicas.rodmensoft.com';
+const DOMAIN_URL =
+    'http://web-pruebas-02.eba-znf4r8rq.us-east-2.elasticbeanstalk.com';
 const BASE_URL = '$DOMAIN_URL/api/';
 
 // You can change this to your provider package name

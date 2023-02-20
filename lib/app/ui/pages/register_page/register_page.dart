@@ -1,8 +1,9 @@
+import 'package:app_viajeros/app/ui/global_widgets/customed_alert_dialog.dart';
 import 'package:app_viajeros/utils/size_box_int.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/instance_manager.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import './controllers/register_controller.dart';
@@ -22,74 +23,121 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final RegisterController controller = Get.find<RegisterController>();
 
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                TopBlackContainer(
-                  bottomSpace: 400.sp,
-                  child: Column(
+    return WillPopScope(
+      onWillPop: () async {
+        return await customedAlertDialog(
+          '¿Está seguro de que desea salir?\nSi sale, perderá todo el progreso que haya hecho en el registro.',
+          accept: 'Si',
+          deny: 'No',
+          cancel: true,
+        );
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            Expanded(
+              child: Stack(
+                children: [
+                  TopBlackContainer(
+                    bottomSpace: 400.sp,
+                    child: Column(
+                      children: [
+                        30.heightSP,
+                        Logo(
+                          size: 69.sp,
+                          blur: false,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                      top: 307.sp,
+                      child: Image.asset(
+                        Assets.assetsMiscMiscNube,
+                        width: 24.sp,
+                      )),
+                  Positioned.fill(
+                    child: RegisterForms(controller: controller),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RegisterForms extends StatelessWidget {
+  const RegisterForms({
+    super.key,
+    required this.controller,
+  });
+
+  final RegisterController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Obx(() => Column(
+            children: [
+              158.heightSP,
+              FormWhiteCardContainer(
+                constraints: BoxConstraints(
+                  minHeight: 500.sp,
+                ),
+                loading: controller.loading.value,
+                // height: 528.sp,
+                children: [
+                  41.heightSP,
+                  CurrentStep(step: controller.currentStep.value),
+                  if (controller.currentStep.value == 1) const FormStep1(),
+                  if (controller.currentStep.value == 2) const FormStep2(),
+                  if (controller.currentStep.value == 3) const FormStep3(),
+                  10.heightSP,
+                  Column(
                     children: [
-                      30.heightSP,
-                      Logo(
-                        size: 69.sp,
-                        blur: false,
+                      AppButton(
+                        padding: EdgeInsets.zero,
+                        margin: EdgeInsets.zero,
+                        onTap: () => controller.nextStep(),
+                        text: controller.currentStep.value != 3
+                            ? 'SIGUIENTE'
+                            : 'FINALIZAR',
+                        color: completed,
+                        width: 180.sp,
+                        shapeBorder: const StadiumBorder(),
+                        textStyle: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12.sp,
+                          color: Colors.white,
+                        ),
                       ),
+                      5.heightSP,
+                      if (controller.currentStep.value != 1)
+                        AppButton(
+                          padding: EdgeInsets.zero,
+                          margin: EdgeInsets.zero,
+                          onTap: () => controller.prevStep(),
+                          text: 'ANTERIOR',
+                          color: completed,
+                          width: 180.sp,
+                          shapeBorder: const StadiumBorder(),
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12.sp,
+                            color: Colors.white,
+                          ),
+                        ),
                     ],
                   ),
-                ),
-                Positioned(
-                    top: 307.sp,
-                    child: Image.asset(
-                      Assets.assetsMiscMiscNube,
-                      width: 24.sp,
-                    )),
-                Positioned.fill(
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Obx(() => Column(
-                          children: [
-                            158.heightSP,
-                            FormWhiteCardContainer(
-                              height: 484.sp,
-                              children: [
-                                41.heightSP,
-                                CurrentStep(step: controller.currentStep.value),
-                                if (controller.currentStep.value == 1)
-                                  const FormStep1(),
-                                if (controller.currentStep.value == 2)
-                                  const FormStep2(),
-                                if (controller.currentStep.value == 3)
-                                  const FormStep3(),
-                                AppButton(
-                                  onTap: () => controller.setIndexTrue(
-                                      controller.currentStep.value),
-                                  text: controller.currentStep.value != 3
-                                      ? 'SIGUIENTE'
-                                      : 'FINALIZAR',
-                                  color: completed,
-                                  width: 180.sp,
-                                  shapeBorder: const StadiumBorder(),
-                                  textStyle: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12.sp,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                20.heightSP,
-                              ],
-                            ),
-                          ],
-                        )),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+                  20.heightSP,
+                ],
+              ),
+            ],
+          )),
     );
   }
 }
@@ -150,7 +198,7 @@ class CurrentCircledStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
+      duration: 500.milliseconds,
       child: Column(
         key: ValueKey('$step,$active'),
         children: [

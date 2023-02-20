@@ -1,6 +1,5 @@
 import 'package:app_viajeros/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/common.dart';
@@ -17,6 +16,10 @@ class HomePage extends StatelessWidget {
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          const SizedBox(
+            width: double.infinity,
+            child: SafeArea(child: SizedBox()),
+          ),
           Stack(
             // alignment: Alignment.bottomCenter,
             children: const [

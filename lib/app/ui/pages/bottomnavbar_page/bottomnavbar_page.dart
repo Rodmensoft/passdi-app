@@ -1,6 +1,5 @@
 import 'package:app_viajeros/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import './controllers/bottomnavbar_controller.dart';
@@ -20,21 +19,21 @@ class BottomNavbarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BottomNavbarController controller = Get.find();
-    return Obx(() => Scaffold(
-          body: Stack(
-            children: [
-              _widgets.elementAt(controller.tabIndex.value),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: CustomBottomNavBar(controller: controller),
-              ),
-            ],
-          ),
-
-          // bottomNavigationBar: ,
-        ));
+    return Obx(
+      () => Scaffold(
+        body: Stack(
+          children: [
+            _widgets.elementAt(controller.tabIndex.value),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: CustomBottomNavBar(controller: controller),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   final List<Widget> _widgets = [

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,38 +8,47 @@ class FormWhiteCardContainer extends StatelessWidget {
   const FormWhiteCardContainer({
     super.key,
     required this.children,
-    required this.height,
-    this.visible = true,
+    this.height,
+    this.loading = false,
+    this.constraints,
   });
   final List<Widget> children;
-  final double height;
-  final bool visible;
+  final double? height;
+  final bool loading;
+  final BoxConstraints? constraints;
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: visible,
-      child: Container(
-        margin: EdgeInsets.only(top: 45.sp, left: 35.sp, right: 35.sp),
-        padding: EdgeInsets.symmetric(horizontal: 30.sp),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20.r),
-          border: Border.all(
-            color: cardColor,
-            width: 1.sp,
-          ),
-        ),
-        width: double.infinity,
-        height: height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // const Spacer(),
-            ...children,
-          ],
+    return Container(
+      margin: EdgeInsets.only(top: 45.sp, left: 35.sp, right: 35.sp),
+      padding: EdgeInsets.symmetric(horizontal: 30.sp),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(
+          color: cardColor,
+          width: 1.sp,
         ),
       ),
+      width: double.infinity,
+      height: height,
+      constraints: constraints,
+      child: loading
+          ? const Center(
+              child: CircularProgressIndicator(
+                color: completed,
+              ),
+            )
+          : FadeIn(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // const Spacer(),
+                  ...children,
+                ],
+              ),
+            ),
     );
   }
 }
