@@ -156,6 +156,7 @@ class ProfileCurvedContainer extends StatelessWidget {
                   children: <Widget>[
                     AutoSizeText(
                       prefs.authData.user.name,
+                      maxLines: 1,
                     ),
                     Text(
                       'Lorem ipsum',

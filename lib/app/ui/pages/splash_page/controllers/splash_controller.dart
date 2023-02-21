@@ -29,6 +29,7 @@ class SplashController extends GetxController {
   }
 
   Future<void> init() async {
+    // prefs.clear();
     await getSeveralData();
     await 1500.milliseconds.delay.call(
       () {

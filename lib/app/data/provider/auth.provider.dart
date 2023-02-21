@@ -7,6 +7,8 @@ import 'package:passdi_app/app/data/models/register/register.dart';
 import '../../constants/api_routes.dart';
 import '../../constants/catch_errors.dart';
 import '../models/api_responde.dart';
+import '../models/auth/auth.model.dart';
+import '../models/auth/user.model.dart';
 import '../services/shared_preferences.service.dart';
 
 class AuthProvider {
@@ -92,7 +94,8 @@ class AuthProvider {
         data: data,
       );
       if (response.statusCode == 200) {
-        savePrefs(json.encode(response.data['data']['tokens']));
+        updateLocalUser(response.data['data']);
+
         return ApiResponse(
           message: '¡Actualización exitosa!',
           success: true,
@@ -110,5 +113,13 @@ class AuthProvider {
   void savePrefs(String data) {
     final SharedPreferencesService prefs = Get.find();
     prefs.authDataString = data;
+  }
+
+  void updateLocalUser(Map<String, dynamic> data) {
+    final SharedPreferencesService prefs = Get.find();
+    final User user = User.fromJson(data);
+    Auth auth = prefs.authData;
+    auth.user = user;
+    prefs.authDataString = authToJson(auth);
   }
 }
