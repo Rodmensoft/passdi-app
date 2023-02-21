@@ -1,5 +1,5 @@
-import 'package:app_viajeros/utils/colors.dart';
-import 'package:app_viajeros/utils/size_box_int.dart';
+import 'package:passdi_app/utils/colors.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';

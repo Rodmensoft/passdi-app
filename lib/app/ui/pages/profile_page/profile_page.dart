@@ -1,10 +1,16 @@
-import 'package:app_viajeros/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:passdi_app/app/constants/civil_states.dart';
+import 'package:passdi_app/app/data/services/shared_preferences.service.dart';
+import 'package:passdi_app/app/ui/global_widgets/custom_dropdown.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 
 import './controllers/profile_controller.dart';
 import '../../../../utils/colors.dart';
+import '../../../../utils/date_picker.dart';
+import '../../../../utils/format_date.dart';
+import '../../global_widgets/custom_cicular_progress_ind.dart';
 import '../home_page/home_page.dart';
 
 export './bindings/profile_binding.dart';
@@ -14,8 +20,9 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProfileController controller = Get.find<ProfileController>();
+    final ProfileController controller = Get.find();
 
+    controller.setInitialData();
     return Column(
       children: [
         const SizedBox(
@@ -30,91 +37,10 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            110.heightSP,
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 31.sp),
-                              width: 322.sp,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 1.sp),
-                                    blurRadius: 5.r,
-                                    color: const Color(0xffE5E5E5),
-                                  )
-                                ],
-                                color: Colors.white,
-                              ),
-                              child: Column(
-                                children: <Widget>[
-                                  41.heightSP,
-                                  AppTextField(
-                                    textFieldType: TextFieldType.NAME,
-                                    decoration: const InputDecoration(
-                                      hintText: 'Nombres y Apellidos',
-                                    ),
-                                  ),
-                                  AppTextField(
-                                    textFieldType: TextFieldType.EMAIL,
-                                    decoration: const InputDecoration(
-                                      hintText: 'Email',
-                                    ),
-                                  ),
-                                  AppTextField(
-                                    textFieldType: TextFieldType.NAME,
-                                    decoration: const InputDecoration(
-                                      hintText: 'Tipo de Documento',
-                                    ),
-                                  ),
-                                  AppTextField(
-                                    textFieldType: TextFieldType.NAME,
-                                    decoration: const InputDecoration(
-                                      hintText: 'Nacionalidad',
-                                    ),
-                                  ),
-                                  AppTextField(
-                                    textFieldType: TextFieldType.NAME,
-                                    decoration: const InputDecoration(
-                                      hintText: 'Fecha de Nacimiento',
-                                    ),
-                                  ),
-                                  AppTextField(
-                                    textFieldType: TextFieldType.NAME,
-                                    decoration: const InputDecoration(
-                                      hintText: 'Estado Civil',
-                                    ),
-                                  ),
-                                  AppTextField(
-                                    textFieldType: TextFieldType.NAME,
-                                    decoration: const InputDecoration(
-                                      hintText: 'Ocupación',
-                                    ),
-                                  ),
-                                  47.heightSP,
-                                  AppButton(
-                                    height: 40.sp,
-                                    width: 225.sp,
-                                    disabledColor: deactivatedCard,
-                                    child: Text(
-                                      'GUARDAR',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12.sp,
-                                        color: Colors.black.withOpacity(0.2),
-                                      ),
-                                    ),
-                                  ),
-                                  20.heightSP,
-                                ],
-                              ),
-                            ),
-                            105.heightSP,
-                          ],
-                        ),
+                      child: Obx(
+                        () => controller.loading.value
+                            ? const CustomCenteredCicularProgressInd()
+                            : const ProfileForm(),
                       ),
                     ),
                   ],
@@ -131,6 +57,151 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class ProfileForm extends StatelessWidget {
+  const ProfileForm({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ProfileController controller = Get.find();
+    final SharedPreferencesService prefs = Get.find();
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          110.heightSP,
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 31.sp),
+            width: 322.sp,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.r),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 1.sp),
+                  blurRadius: 5.r,
+                  color: const Color(0xffE5E5E5),
+                )
+              ],
+              color: Colors.white,
+            ),
+            child: Form(
+              key: controller.formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                children: <Widget>[
+                  41.heightSP,
+                  AppTextField(
+                    controller: controller.nameCtrl,
+                    textFieldType: TextFieldType.NAME,
+                    decoration: const InputDecoration(
+                      hintText: 'Nombres y Apellidos',
+                    ),
+                  ),
+                  IgnorePointer(
+                    ignoring: true,
+                    child: AppTextField(
+                      controller: controller.emailCtrl,
+                      textFieldType: TextFieldType.EMAIL,
+                      decoration: const InputDecoration(
+                        hintText: 'Email',
+                      ),
+                    ),
+                  ),
+                  Obx(() => CustomDropdownButton(
+                        value: controller.documentTypeId.value,
+                        items: prefs.severalData!.documentTypes,
+                        onChanged: (value) {
+                          controller.documentTypeId.value = value;
+                        },
+                        hintText: 'Tipo de Documento',
+                      )),
+                  AppTextField(
+                    controller: controller.documentCtrl,
+                    textFieldType: TextFieldType.NAME,
+                    decoration: const InputDecoration(
+                      hintText: 'Número de Documento',
+                    ),
+                  ),
+                  Obx(() => CustomDropdownButton(
+                        value: controller.nationalityId.value,
+                        items: prefs.severalData!.nationality,
+                        onChanged: (value) {
+                          controller.nationalityId.value = value;
+                        },
+                        hintText: 'Nacionalidad',
+                      )),
+                  GestureDetector(
+                    onTap: () async {
+                      DateTime? initialDate = controller.birthCtrl.text.isEmpty
+                          ? null
+                          : DateTime.parse(controller.birthCtrl.text);
+                      DateTime? selectedDate =
+                          await customDatePicker(context, initialDate);
+                      if (selectedDate != null) {
+                        controller.birthCtrl.text =
+                            formatDateBirthdate(selectedDate);
+                      }
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      child: IgnorePointer(
+                        ignoring: true,
+                        child: AppTextField(
+                          controller: controller.birthCtrl,
+                          textFieldType: TextFieldType.NAME,
+                          decoration: const InputDecoration(
+                            hintText: 'Fecha de Nacimiento',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Obx(() => CustomDropdownButton(
+                        value: controller.civilStateId.value,
+                        items: civilStates,
+                        onChanged: (value) {
+                          controller.civilStateId.value = value;
+                        },
+                        hintText: 'Estado civil',
+                      )),
+                  Obx(() => CustomDropdownButton(
+                        value: controller.occupationId.value,
+                        items: prefs.severalData!.occupations,
+                        onChanged: (value) {
+                          controller.occupationId.value = value;
+                        },
+                        hintText: 'Ocupación',
+                      )),
+                  47.heightSP,
+                  AppButton(
+                    height: 40.sp,
+                    width: 225.sp,
+                    color: completed,
+                    onTap: () {
+                      controller.updateUserData();
+                    },
+                    child: Text(
+                      'GUARDAR',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  20.heightSP,
+                ],
+              ),
+            ),
+          ),
+          105.heightSP,
+        ],
+      ),
     );
   }
 }

@@ -1,11 +1,11 @@
-import 'package:app_viajeros/app/data/models/several_data/document_types.dart';
-import 'package:app_viajeros/app/ui/pages/register_page/controllers/register_controller.dart';
+import 'package:passdi_app/app/ui/pages/register_page/controllers/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../../utils/date_picker.dart';
 import '../../../../../utils/format_date.dart';
+import '../../../../constants/civil_states.dart';
 import '../../../global_widgets/custom_dropdown.dart';
 
 class FormStep1 extends StatelessWidget {
@@ -113,10 +113,7 @@ class FormStep2 extends StatelessWidget {
             Obx(
               () => CustomDropdownButton(
                 value: controller.genderId.value,
-                items: <DropDownModel>[
-                  DropDownModel(id: 1, name: 'Masculino'),
-                  DropDownModel(id: 2, name: 'Femenino'),
-                ],
+                items: genders,
                 hintText: 'Género',
                 onChanged: (value) {
                   controller.genderId.value = value;
@@ -168,7 +165,11 @@ class FormStep3 extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
-                  DateTime? selectedDate = await customDatePicker(context);
+                  DateTime? initialDate = controller.birthDate.text.isEmpty
+                      ? null
+                      : DateTime.parse(controller.birthDate.text);
+                  DateTime? selectedDate =
+                      await customDatePicker(context, initialDate);
                   if (selectedDate != null) {
                     controller.birthDate.text =
                         formatDateBirthdate(selectedDate);
@@ -191,12 +192,7 @@ class FormStep3 extends StatelessWidget {
               Obx(
                 () => CustomDropdownButton(
                   value: controller.civilStateId.value,
-                  items: <DropDownModel>[
-                    DropDownModel(id: 1, name: 'Soltero(a)'),
-                    DropDownModel(id: 2, name: 'Casado(a)'),
-                    DropDownModel(id: 3, name: 'Divorciado(a)'),
-                    DropDownModel(id: 4, name: 'Viudo(a)'),
-                  ],
+                  items: civilStates,
                   hintText: 'Estado Civil',
                   onChanged: (value) {
                     controller.civilStateId.value = value;

@@ -7,7 +7,7 @@ part of 'several_data.model.dart';
 // **************************************************************************
 
 SeveralData _$SeveralDataFromJson(Map<String, dynamic> json) => SeveralData(
-      products: (json['products'] as List<dynamic>)
+      nationality: (json['products'] as List<dynamic>)
           .map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
       airports: (json['airports'] as List<dynamic>)
@@ -26,7 +26,7 @@ SeveralData _$SeveralDataFromJson(Map<String, dynamic> json) => SeveralData(
 
 Map<String, dynamic> _$SeveralDataToJson(SeveralData instance) =>
     <String, dynamic>{
-      'products': instance.products,
+      'products': instance.nationality,
       'airports': instance.airports,
       'airlines': instance.airlines,
       'document_types': instance.documentTypes,

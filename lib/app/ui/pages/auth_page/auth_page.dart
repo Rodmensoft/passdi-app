@@ -1,10 +1,9 @@
-import 'package:app_viajeros/app/routes/app_routes.dart';
-import 'package:app_viajeros/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:passdi_app/app/routes/app_routes.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 
 import '../../../../main.dart';
 import '../../global_widgets/social_media_button.dart';

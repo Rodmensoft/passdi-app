@@ -4,4 +4,6 @@ class ApiRoutes {
   static const String registerUser = 'registerUser';
 
   static const String login = 'login';
+
+  static const String updateProfile = 'updateProfile';
 }

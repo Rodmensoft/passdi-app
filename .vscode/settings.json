@@ -7,6 +7,5 @@
     // Remove from file watching
     "files.watcherExclude": {
       "**/.fvm": true
-    },
-    "dart.sdkPath": "C:\\Users\\USUARIO HP\\fvm\\versions\\3.7.0\\bin\\cache\\dart-sdk"
+    }
 }

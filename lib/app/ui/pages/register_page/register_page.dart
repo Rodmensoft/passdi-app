@@ -1,10 +1,10 @@
-import 'package:app_viajeros/app/ui/global_widgets/customed_alert_dialog.dart';
-import 'package:app_viajeros/utils/size_box_int.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/instance_manager.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:passdi_app/app/ui/global_widgets/customed_alert_dialog.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 
 import './controllers/register_controller.dart';
 import '../../../../utils/colors.dart';
@@ -39,7 +39,6 @@ class RegisterPage extends StatelessWidget {
               child: Stack(
                 children: [
                   TopBlackContainer(
-                    bottomSpace: 400.sp,
                     child: Column(
                       children: [
                         30.heightSP,
@@ -51,11 +50,12 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                      top: 307.sp,
-                      child: Image.asset(
-                        Assets.assetsMiscMiscNube,
-                        width: 24.sp,
-                      )),
+                    top: 307.sp,
+                    child: Image.asset(
+                      Assets.assetsMiscMiscNube,
+                      width: 24.sp,
+                    ),
+                  ),
                   Positioned.fill(
                     child: RegisterForms(controller: controller),
                   ),

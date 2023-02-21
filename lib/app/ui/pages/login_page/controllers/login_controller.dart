@@ -1,6 +1,6 @@
-import 'package:app_viajeros/app/data/models/api_responde.dart';
-import 'package:app_viajeros/app/data/services/auth.service.dart';
-import 'package:app_viajeros/app/ui/global_widgets/customed_alert_dialog.dart';
+import 'package:passdi_app/app/data/models/api_responde.dart';
+import 'package:passdi_app/app/data/services/auth.service.dart';
+import 'package:passdi_app/app/ui/global_widgets/customed_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -46,7 +46,7 @@ class LoginController extends GetxController {
         Get.offAndToNamed(AppRoutes.BOTTOM);
         return;
       }
-      customedAlertDialog(response.message);
+      await customedAlertDialog(response.message);
     }
   }
 }

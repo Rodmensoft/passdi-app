@@ -1,5 +1,8 @@
-import 'package:app_viajeros/utils/size_box_int.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
+import 'package:passdi_app/app/data/services/shared_preferences.service.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/common.dart';
@@ -118,6 +121,7 @@ class ProfileCurvedContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SharedPreferencesService prefs = Get.find();
     return Container(
       alignment: Alignment.bottomCenter,
       height: 213.sp,
@@ -150,8 +154,8 @@ class ProfileCurvedContainer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    const Text(
-                      'Camila Lopez',
+                    AutoSizeText(
+                      prefs.authData.user.name,
                     ),
                     Text(
                       'Lorem ipsum',

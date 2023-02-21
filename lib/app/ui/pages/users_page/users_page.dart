@@ -1,6 +1,6 @@
-import 'package:app_viajeros/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 
 import './controllers/users_controller.dart';
 import '../../../../utils/colors.dart';
@@ -36,7 +36,9 @@ class UsersPage extends StatelessWidget {
                         int index = entry.key;
                         var user = entry.value;
                         return UsersVerticalListContainer(
-                            index: index, user: user);
+                          index: index,
+                          user: user,
+                        );
                       }),
                       105.heightSP,
                     ],
@@ -87,7 +89,9 @@ class UsersVerticalListContainer extends StatelessWidget {
           borderRadius: curvedContainerBorderRadius,
           boxShadow: [
             BoxShadow(
-                color: const Color(0xffE7E4E9), offset: Offset(-1.sp, 1.sp))
+              color: const Color(0xffE7E4E9),
+              offset: Offset(-1.sp, 1.sp),
+            )
           ]),
       width: double.infinity,
       height: 101.sp,

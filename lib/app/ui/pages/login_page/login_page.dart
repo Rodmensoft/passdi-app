@@ -1,5 +1,5 @@
-import 'package:app_viajeros/app/ui/pages/login_page/controllers/login_controller.dart';
-import 'package:app_viajeros/utils/size_box_int.dart';
+import 'package:passdi_app/app/ui/pages/login_page/controllers/login_controller.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';

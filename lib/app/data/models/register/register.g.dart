@@ -15,23 +15,32 @@ RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) =>
       birthDate: json['birth_date'] as String,
       document: json['document'] as String,
       email: json['email'] as String,
-      password: json['password'] as String,
+      password: json['password'] as String?,
       genderId: json['gender_id'] as int,
       civilStateId: json['civil_state_id'] as int,
       phone: json['phone'] as String,
     );
 
-Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'nationality_id': instance.nationalityId,
-      'occupation_id': instance.occupationId,
-      'document_type_id': instance.documentTypeId,
-      'birth_date': instance.birthDate,
-      'document': instance.document,
-      'email': instance.email,
-      'password': instance.password,
-      'gender_id': instance.genderId,
-      'civil_state_id': instance.civilStateId,
-      'phone': instance.phone,
-    };
+Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'nationality_id': instance.nationalityId,
+    'occupation_id': instance.occupationId,
+    'document_type_id': instance.documentTypeId,
+    'birth_date': instance.birthDate,
+    'document': instance.document,
+    'email': instance.email,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('password', instance.password);
+  val['gender_id'] = instance.genderId;
+  val['civil_state_id'] = instance.civilStateId;
+  val['phone'] = instance.phone;
+  return val;
+}

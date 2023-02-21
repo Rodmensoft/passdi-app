@@ -1,5 +1,5 @@
-import 'package:app_viajeros/app/data/models/api_responde.dart';
 import 'package:dio/dio.dart';
+import 'package:passdi_app/app/data/models/api_responde.dart';
 
 ApiResponse catchErrors(DioError e) {
   const String checkInternetMessage =
@@ -15,6 +15,11 @@ ApiResponse catchErrors(DioError e) {
     errorMessage = e.response?.data;
   } else if (e.response?.data['data'] is String) {
     errorMessage = e.response?.data['data'];
+  } else if (e.response?.data['data'] is Map<String, dynamic>) {
+    final Map<String, dynamic>? data = e.response!.data['data'];
+    final List<String> dataAsList =
+        data!.values.map((value) => value.toString()).toList();
+    errorMessage = dataAsList.join('\n');
   } else {
     errorMessage = e.response?.data['message'] ?? e.message;
   }

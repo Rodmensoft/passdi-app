@@ -23,7 +23,8 @@ class RegisterModel {
   String birthDate;
   String document;
   String email;
-  String password;
+  @JsonKey(includeIfNull: false)
+  String? password;
   int genderId;
   int civilStateId;
   String phone;
@@ -36,7 +37,7 @@ class RegisterModel {
     required this.birthDate,
     required this.document,
     required this.email,
-    required this.password,
+    this.password,
     required this.genderId,
     required this.civilStateId,
     required this.phone,

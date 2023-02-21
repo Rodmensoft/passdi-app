@@ -1,17 +1,17 @@
 // ignore_for_file: unnecessary_cast
 
-import 'package:app_viajeros/app/data/models/api_responde.dart';
-import 'package:app_viajeros/app/data/models/register/register.dart';
-import 'package:app_viajeros/app/data/models/several_data/document_types.dart';
-import 'package:app_viajeros/app/data/models/several_data/occupations.dart';
-import 'package:app_viajeros/app/data/models/several_data/product.dart';
-import 'package:app_viajeros/app/data/models/several_data/several_data.model.dart';
-import 'package:app_viajeros/app/data/services/auth.service.dart';
-import 'package:app_viajeros/app/data/services/several_data.service.dart';
-import 'package:app_viajeros/app/data/services/shared_preferences.service.dart';
-import 'package:app_viajeros/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:passdi_app/app/data/models/api_responde.dart';
+import 'package:passdi_app/app/data/models/register/register.dart';
+import 'package:passdi_app/app/data/models/several_data/document_types.dart';
+import 'package:passdi_app/app/data/models/several_data/occupations.dart';
+import 'package:passdi_app/app/data/models/several_data/product.dart';
+import 'package:passdi_app/app/data/models/several_data/several_data.model.dart';
+import 'package:passdi_app/app/data/services/auth.service.dart';
+import 'package:passdi_app/app/data/services/shared_preferences.service.dart';
+import 'package:passdi_app/app/routes/app_routes.dart';
 
 import '../../../global_widgets/customed_alert_dialog.dart';
 
@@ -37,7 +37,7 @@ class RegisterController extends GetxController {
 
   SeveralData? get severalData => prefs.severalData;
   List<DropDownModel> get documentTypes => severalData?.documentTypes ?? [];
-  List<Product> get products => severalData?.products ?? [];
+  List<Product> get products => severalData?.nationality ?? [];
   List<Occupation> get ocuppations => severalData?.occupations ?? [];
 
   Rx<String?> documentTypeId = (null as String?).obs;
@@ -72,7 +72,6 @@ class RegisterController extends GetxController {
   void onReady() {
     // TODO: implement onReady
     super.onReady();
-    getSeveralData();
   }
 
   @override
@@ -124,20 +123,10 @@ class RegisterController extends GetxController {
     ApiResponse response = await service.register(registerModel);
     loading.value = false;
     if (response.success) {
-      customedAlertDialog(response.message);
-      Get.back();
-      Get.offAllNamed(AppRoutes.BOTTOM);
+      await Get.offAllNamed(AppRoutes.BOTTOM);
+      toast(response.message);
       return;
     }
     customedAlertDialog(response.message);
-  }
-
-  Future<void> getSeveralData() async {
-    if (severalData == null) {
-      loading.value = true;
-      final SeveralDataService service = Get.find();
-      ApiResponse response = await service.getSeveralData();
-      loading.value = false;
-    }
   }
 }

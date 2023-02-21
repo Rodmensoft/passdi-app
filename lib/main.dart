@@ -1,10 +1,10 @@
-import 'package:app_viajeros/app/ui/pages/splash_page/splash_page.dart';
-import 'package:app_viajeros/locale/base_language.dart';
-import 'package:app_viajeros/storage/app_storage.dart';
-import 'package:app_viajeros/utils/colors.dart';
-import 'package:app_viajeros/utils/common.dart';
-import 'package:app_viajeros/utils/configs.dart';
-import 'package:app_viajeros/utils/dependency_injection.dart';
+import 'package:passdi_app/app/ui/pages/splash_page/splash_page.dart';
+import 'package:passdi_app/locale/base_language.dart';
+import 'package:passdi_app/storage/app_storage.dart';
+import 'package:passdi_app/utils/colors.dart';
+import 'package:passdi_app/utils/common.dart';
+import 'package:passdi_app/utils/configs.dart';
+import 'package:passdi_app/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

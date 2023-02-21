@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/colors.dart';
+import 'custom_cicular_progress_ind.dart';
 
 class FormWhiteCardContainer extends StatelessWidget {
   const FormWhiteCardContainer({
@@ -34,11 +35,7 @@ class FormWhiteCardContainer extends StatelessWidget {
       height: height,
       constraints: constraints,
       child: loading
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: completed,
-              ),
-            )
+          ? const CustomCenteredCicularProgressInd()
           : FadeIn(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

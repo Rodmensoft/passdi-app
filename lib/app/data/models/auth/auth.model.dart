@@ -1,5 +1,19 @@
-class AuthModel {
-  AuthModel({
+import 'dart:convert';
+
+import 'package:passdi_app/app/data/models/auth/user.model.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'auth.model.g.dart';
+
+Auth authFromJson(String str) => Auth.fromJson(json.decode(str));
+
+String authToJsonList(List<Auth> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String authToJson(Auth data) => json.encode(data.toJson());
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class Auth {
+  Auth({
     required this.tokenType,
     required this.expiresIn,
     required this.accessToken,
@@ -12,38 +26,6 @@ class AuthModel {
   String accessToken;
   String refreshToken;
   User user;
-}
-
-class User {
-  User({
-    required this.id,
-    required this.name,
-    required this.birthDate,
-    required this.document,
-    required this.phone,
-    required this.email,
-    required this.profileVisible,
-    required this.notification,
-    required this.location,
-    required this.occupationId,
-    required this.documentTypeId,
-    required this.nationalityId,
-    required this.civilStateId,
-    required this.genderId,
-  });
-
-  int id;
-  String name;
-  DateTime birthDate;
-  String document;
-  String phone;
-  String email;
-  int profileVisible;
-  int notification;
-  String location;
-  int occupationId;
-  int documentTypeId;
-  int nationalityId;
-  int civilStateId;
-  int genderId;
+  factory Auth.fromJson(Map<String, dynamic> json) => _$AuthFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthToJson(this);
 }

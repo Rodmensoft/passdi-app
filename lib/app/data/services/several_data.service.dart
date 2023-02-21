@@ -1,5 +1,5 @@
-import 'package:app_viajeros/app/data/models/api_responde.dart';
-import 'package:app_viajeros/app/data/provider/several_data.provider.dart';
+import 'package:passdi_app/app/data/models/api_responde.dart';
+import 'package:passdi_app/app/data/provider/several_data.provider.dart';
 import 'package:get/instance_manager.dart';
 
 class SeveralDataService {

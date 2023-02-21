@@ -1,4 +1,4 @@
-import 'package:app_viajeros/utils/size_box_int.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
