@@ -1,16 +1,15 @@
 import 'dart:convert';
 
+import 'package:nb_utils/nb_utils.dart';
 import 'package:passdi_app/app/data/models/auth/auth.model.dart';
 import 'package:passdi_app/app/data/models/several_data/several_data.model.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesService {
-  static final SharedPreferencesService _instancia =
-      SharedPreferencesService._internal();
+class Prefs {
+  static final Prefs _instancia = Prefs._internal();
   late SharedPreferences _prefs;
-  factory SharedPreferencesService() => _instancia;
-  SharedPreferencesService._internal();
+  factory Prefs() => _instancia;
+  Prefs._internal();
 
   String get severalDataString => _prefs.getString('severalData') ?? '';
   set severalDataString(String value) => _prefs.setString('severalData', value);

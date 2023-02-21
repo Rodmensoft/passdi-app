@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:passdi_app/app/data/models/several_data/several_data.model.dart';
-import 'package:passdi_app/app/data/services/shared_preferences.service.dart';
 import 'package:get/instance_manager.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:passdi_app/app/data/models/several_data/several_data.model.dart';
+import 'package:passdi_app/app/data/services/shared_preferences.service.dart';
 
 part 'user.model.g.dart';
 
@@ -52,8 +52,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  SeveralData get severalData =>
-      Get.find<SharedPreferencesService>().severalData!;
+  SeveralData get severalData => Get.find<Prefs>().severalData!;
 
   String get documentType => severalData.documentTypes
       .firstWhere((element) => element.id == documentTypeId)

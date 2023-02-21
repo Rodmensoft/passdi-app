@@ -7,7 +7,7 @@ import '../../../../data/models/several_data/several_data.model.dart';
 import '../../../../data/services/several_data.service.dart';
 
 class SplashController extends GetxController {
-  final prefs = Get.find<SharedPreferencesService>();
+  final prefs = Get.find<Prefs>();
   SeveralData? get severalData => prefs.severalData;
   @override
   void onInit() {

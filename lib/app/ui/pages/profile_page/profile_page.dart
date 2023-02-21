@@ -69,7 +69,7 @@ class ProfileForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProfileController controller = Get.find();
-    final SharedPreferencesService prefs = Get.find();
+    final Prefs prefs = Get.find();
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(

@@ -17,7 +17,7 @@ import '../../../global_widgets/customed_alert_dialog.dart';
 
 class RegisterController extends GetxController {
   RxInt currentStep = 1.obs;
-  final prefs = Get.find<SharedPreferencesService>();
+  final prefs = Get.find<Prefs>();
 
   final GlobalKey<FormState> formKeyStep1 = GlobalKey<FormState>();
   final GlobalKey<FormState> formKeyStep2 = GlobalKey<FormState>();

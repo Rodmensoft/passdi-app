@@ -15,11 +15,14 @@ class DependencyInjection {
 
     Get.put(AuthProvider());
     Get.put(AuthService());
+
+    Get.put(SaveRequestedPointProvider());
+    Get.put(SaveRequestedPointService());
   }
 
   static Future<void> initSharedPrefs() async {
-    Get.put(SharedPreferencesService());
-    SharedPreferencesService shared = Get.find<SharedPreferencesService>();
+    Get.put(Prefs());
+    Prefs shared = Get.find<Prefs>();
     await shared.initPrefs();
   }
 }

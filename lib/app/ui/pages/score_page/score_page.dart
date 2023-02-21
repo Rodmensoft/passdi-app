@@ -1,7 +1,9 @@
-import 'package:passdi_app/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:passdi_app/app/ui/pages/requestpoints_page/controllers/requestpoints_controller.dart';
+import 'package:passdi_app/app/ui/pages/requestpoints_page/requestpoints_page.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 
 import './controllers/score_controller.dart';
 import '../../../../utils/colors.dart';
@@ -71,13 +73,18 @@ class ScorePage extends StatelessWidget {
                     AppButton(
                       height: 40.sp,
                       width: 225.sp,
-                      disabledColor: deactivatedCard,
+                      onTap: () {
+                        Get.lazyPut(() => RequestPointsController());
+                        Get.dialog(const RequestPointsPage());
+                      },
+                      color: hold,
                       child: Text(
                         'SOLICITAR PUNTOS',
                         style: TextStyle(
+                          fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.w600,
                           fontSize: 12.sp,
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.white.withOpacity(0.8),
                         ),
                       ),
                     ),
@@ -125,16 +132,20 @@ class LocationCurvedContainer extends StatelessWidget {
     this.scoreColor,
     required this.to,
     required this.from,
-    required this.score,
+    this.score,
     this.bottomBorder = true,
+    this.date,
+    this.reservationCode,
   });
   final double height;
   final Color? color;
   final Color textColor;
   final Color? scoreColor;
   final String to, from;
-  final int score;
+  final int? score;
   final bool bottomBorder;
+  final String? date;
+  final String? reservationCode;
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +171,7 @@ class LocationCurvedContainer extends StatelessWidget {
           DefaultTextStyle(
             style: TextStyle(
               fontStyle: FontStyle.italic,
-              color: score == 0 ? failed : textColor,
+              color: score != null && score == 0 ? failed : textColor,
             ),
             child: Row(
               children: [
@@ -168,42 +179,121 @@ class LocationCurvedContainer extends StatelessWidget {
                   start: false,
                   name: to,
                 ),
+                if (score == null) const Spacer(),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 21.sp),
                   width: 1.sp,
                   height: 30.sp,
                   color: const Color(0xffDDDDDD),
                 ),
+                if (score == null) const Spacer(),
                 FromToWidget(
                   name: from,
                 ),
-                const Spacer(),
-                Container(
-                  width: 53.sp,
-                  height: 38.sp,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      radiusCircular(10.r),
-                    ),
-                    color: score == 0
-                        ? deactivatedCard
-                        : scoreColor ?? Colors.white.withOpacity(0.2),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Puntos\n$score',
-                    style: TextStyle(
+                if (score != null) const Spacer(),
+                if (score != null)
+                  Container(
+                    width: 53.sp,
+                    height: 38.sp,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        radiusCircular(10.r),
+                      ),
                       color: score == 0
-                          ? Colors.black.withOpacity(0.2)
-                          : Colors.white,
-                      fontSize: 10.sp,
+                          ? deactivatedCard
+                          : scoreColor ?? Colors.white.withOpacity(0.2),
                     ),
-                    textAlign: TextAlign.center,
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Puntos\n$score',
+                      style: TextStyle(
+                        color: score == 0
+                            ? Colors.black.withOpacity(0.2)
+                            : Colors.white,
+                        fontSize: 10.sp,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          // Row(
+          //   children: const [
+          //     Icon(Icons.calendar_month_outlined),
+          //   ],
+          // ),
+          if (date != null) 15.heightSP,
+          if (date != null)
+            Row(
+              children: [
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      WidgetSpan(
+                        child: Opacity(
+                          opacity: 0.5,
+                          child: Icon(
+                            Icons.calendar_month_outlined,
+                            color: textColor,
+                            size: 15.sp,
+                          ),
+                        ),
+                        alignment: PlaceholderAlignment.middle,
+                      ),
+                      TextSpan(
+                        text: '\t\tFecha:\t\t\t\t',
+                        style: TextStyle(
+                          color: textColor.withOpacity(0.5),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const TextSpan(text: '01/02/2022'),
+                    ],
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12.sp,
+                      color: textColor.withOpacity(0.6),
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
+
+          if (reservationCode != null) 21.heightSP,
+          if (reservationCode != null)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Código de Reserva',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12.sp,
+                    color: textColor,
+                  ),
+                ),
+                18.widthSP,
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 15.sp, vertical: 12.5.sp),
+                  decoration: BoxDecoration(
+                      color: const Color(0xffE0FBFC),
+                      borderRadius: BorderRadius.circular(52.r)),
+                  child: Text(
+                    reservationCode!,
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12.sp,
+                      color: textColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
           42.heightSP,
         ],
       ),

@@ -1,8 +1,11 @@
-import 'package:passdi_app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:passdi_app/utils/colors.dart';
 
 Future<DateTime?> customDatePicker(
-    BuildContext context, DateTime? initialDate) async {
+  BuildContext context,
+  DateTime? initialDate, {
+  DateTime? lastDate,
+}) async {
   final DateTime now = DateTime.now();
 
   //Solo para mayores de 18 años
@@ -23,7 +26,7 @@ Future<DateTime?> customDatePicker(
     },
     initialDate: initialDate ?? dateTime,
     firstDate: DateTime(now.year - 120),
-    lastDate: dateTime,
+    lastDate: lastDate ?? dateTime,
   );
 
   return selectedDate;

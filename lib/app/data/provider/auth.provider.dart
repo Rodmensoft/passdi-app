@@ -86,8 +86,7 @@ class AuthProvider {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization':
-                'Bearer ${Get.find<SharedPreferencesService>().authData.accessToken}',
+            'Authorization': 'Bearer ${Get.find<Prefs>().authData.accessToken}',
           },
         ),
         ApiRoutes.updateProfile,
@@ -111,12 +110,12 @@ class AuthProvider {
   }
 
   void savePrefs(String data) {
-    final SharedPreferencesService prefs = Get.find();
+    final Prefs prefs = Get.find();
     prefs.authDataString = data;
   }
 
   void updateLocalUser(Map<String, dynamic> data) {
-    final SharedPreferencesService prefs = Get.find();
+    final Prefs prefs = Get.find();
     final User user = User.fromJson(data);
     Auth auth = prefs.authData;
     auth.user = user;

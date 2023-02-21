@@ -8,7 +8,7 @@ class Airline {
     required this.id,
     required this.iata,
     required this.icao,
-    required this.airline,
+    required this.name,
     required this.callsign,
     required this.country,
   });
@@ -16,7 +16,8 @@ class Airline {
   int id;
   String iata;
   String icao;
-  String airline;
+  @JsonKey(name: 'airline')
+  String name;
   String callsign;
   String country;
 

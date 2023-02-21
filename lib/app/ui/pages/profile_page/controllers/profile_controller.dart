@@ -11,7 +11,7 @@ import '../../../../../utils/format_date.dart';
 import '../../../../data/services/shared_preferences.service.dart';
 
 class ProfileController extends GetxController {
-  final SharedPreferencesService prefs = Get.find();
+  final Prefs prefs = Get.find();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 

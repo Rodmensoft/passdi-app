@@ -1,18 +1,6 @@
-import 'dart:convert';
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'register.g.dart';
-
-List<RegisterModel> registerFromJsonList(String str) =>
-    List<RegisterModel>.from(
-        json.decode(str).map((x) => RegisterModel.fromJson(x)));
-RegisterModel registerFromJson(String str) =>
-    RegisterModel.fromJson(json.decode(str));
-
-String registerToJsonList(List<RegisterModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-String registerToJson(RegisterModel data) => json.encode(data.toJson());
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class RegisterModel {

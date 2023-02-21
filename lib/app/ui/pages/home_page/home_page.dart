@@ -121,7 +121,7 @@ class ProfileCurvedContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SharedPreferencesService prefs = Get.find();
+    final Prefs prefs = Get.find();
     return Container(
       alignment: Alignment.bottomCenter,
       height: 213.sp,
