@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:passdi_app/app/data/models/requested_point/requested_point.dart';
+import 'package:passdi_app/app/data/models/requested_point/requested_point.sent.dart';
+import 'package:passdi_app/app/data/models/requested_point/requested_points.received.dart';
 import 'package:passdi_app/app/ui/global_widgets/customed_alert_dialog.dart';
+import 'package:passdi_app/app/ui/pages/score_page/controllers/score_controller.dart';
 import 'package:passdi_app/utils/dependency_export.dart';
 
 class RequestPointsController extends GetxController {
@@ -18,7 +20,7 @@ class RequestPointsController extends GetxController {
 
   RxBool loading = false.obs;
 
-  RequestedPointsModel get model => RequestedPointsModel(
+  RequestedPointsModelSent get model => RequestedPointsModelSent(
         reservationCode: reservationCtrl.text,
         travelDate: travelDateCtrl.text,
         airportOriginId: int.parse(origin.value!),
@@ -51,6 +53,10 @@ class RequestPointsController extends GetxController {
       final response = await service.saveRequestedPoint(model);
       loading.value = false;
       if (response.success && (Get.isDialogOpen ?? false)) {
+        ScoreController scoreController = Get.find();
+        RequestedPointsReceived requestedPR =
+            (response.data as RequestedPointsReceived);
+        scoreController.allRequestedPoints.add(requestedPR);
         Get.back();
       }
       customedAlertDialog(response.message);

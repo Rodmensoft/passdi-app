@@ -10,4 +10,6 @@ class ApiRoutes {
   static const String saveRequestedPoint = 'saveRequestedPoint';
 
   static const String getPoints = 'getPoints';
+
+  static const String getAllRequestedPoints = 'getAllRequestedPoints';
 }

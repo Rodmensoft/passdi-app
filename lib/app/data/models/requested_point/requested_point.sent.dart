@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'requested_point.g.dart';
+part 'requested_point.sent.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class RequestedPointsModel {
-  RequestedPointsModel({
+class RequestedPointsModelSent {
+  RequestedPointsModelSent({
     required this.reservationCode,
     required this.travelDate,
     required this.airportOriginId,
@@ -18,7 +18,7 @@ class RequestedPointsModel {
   int airportDestinationId;
   int airlineId;
 
-  factory RequestedPointsModel.fromJson(Map<String, dynamic> json) =>
-      _$RequestedPointsModelFromJson(json);
-  Map<String, dynamic> toJson() => _$RequestedPointsModelToJson(this);
+  factory RequestedPointsModelSent.fromJson(Map<String, dynamic> json) =>
+      _$RequestedPointsModelSentFromJson(json);
+  Map<String, dynamic> toJson() => _$RequestedPointsModelSentToJson(this);
 }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -8,6 +9,7 @@ import 'package:passdi_app/utils/size_box_int.dart';
 import './controllers/score_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/common.dart';
+import '../../global_widgets/custom_cicular_progress_ind.dart';
 import '../home_page/home_page.dart';
 
 export './bindings/score_binding.dart';
@@ -27,95 +29,77 @@ class ScorePage extends StatelessWidget {
           child: const SafeArea(child: SizedBox()),
         ),
         Expanded(
-          child: Stack(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
+          child: Obx(
+            () => Stack(
+              children: [
+                controller.loading.value
+                    ? const CustomCenteredCicularProgressInd()
+                    : SizedBox(
+                        width: double.infinity,
                         child: Column(
                           children: [
-                            SafeArea(child: 190.heightSP),
-                            // ...controller.places.asMap().entries.map((entry) {
-                            //   int index = entry.key;
-                            //   var user = entry.value;
-                            //   return UsersVerticalListContainer(
-                            //       index: index, user: user);
-                            // }),
-                            LocationCurvedContainer(
-                              height: 100.sp,
-                              to: 'Rodríguez Ballón',
-                              from: 'Intl Jorge Chávez',
-                              score: 25,
-                              scoreColor: verifyAcColor,
+                            Expanded(
+                              child: SingleChildScrollView(
+                                physics: const BouncingScrollPhysics(),
+                                child: Column(
+                                  children: [
+                                    93.heightSP,
+                                    ...controller.allRequestedPoints.map(
+                                      (element) => LocationCurvedContainer(
+                                        textColor: element.stateColor,
+                                        height: 100.sp,
+                                        destination: element.destination,
+                                        origin: element.origin,
+                                        score: element.point,
+                                        scoreColor: verifyAcColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            LocationCurvedContainer(
-                              height: 100.sp,
-                              to: 'Rodríguez Ballón',
-                              from: 'Intl Jorge Chávez',
-                              score: 25,
-                              scoreColor: verifyAcColor,
-                            ),
-                            LocationCurvedContainer(
-                              height: 100.sp,
-                              to: 'Rodríguez Ballón',
-                              from: 'Intl Jorge Chávez',
-                              score: 0,
-                              scoreColor: verifyAcColor,
-                            ),
+                            90.heightSP,
                           ],
                         ),
                       ),
-                    ),
-                    AppButton(
-                      height: 40.sp,
-                      width: 225.sp,
-                      onTap: () {
-                        Get.lazyPut(() => RequestPointsController());
-                        Get.dialog(const RequestPointsPage());
-                      },
-                      color: hold,
-                      child: Text(
-                        'SOLICITAR PUNTOS',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12.sp,
-                          color: Colors.white.withOpacity(0.8),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Center(
+                      child: AppButton(
+                        height: 40.sp,
+                        width: 225.sp,
+                        onTap: () {
+                          Get.lazyPut(() => RequestPointsController());
+                          Get.dialog(const RequestPointsPage());
+                        },
+                        color: hold,
+                        child: Text(
+                          'SOLICITAR PUNTOS',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12.sp,
+                            color: Colors.white.withOpacity(0.8),
+                          ),
                         ),
                       ),
                     ),
-                    46.heightSP,
+                    10.heightSP,
                     105.heightSP,
                   ],
                 ),
-              ),
-              Stack(
-                children: [
-                  LocationCurvedContainer(
-                    color: verifyAcColor,
-                    height: 191.sp,
-                    textColor: Colors.white,
-                    to: 'Rodríguez Ballón',
-                    from: 'Intl Jorge Chávez',
-                    score: 25,
-                    bottomBorder: false,
-                  ),
-                  ScoreCurvedContainer(
-                    color: Colors.white.withOpacity(0.3),
-                    textColor: Colors.white,
-                  ),
-                  Container(
-                    color: const Color(0xff4BC0E8),
-                    width: double.infinity,
-                    child: const SafeArea(child: SizedBox()),
-                  ),
-                ],
-              ),
-            ],
+                Stack(
+                  children: const [
+                    ScoreCurvedContainer(
+                      color: Color(0xff4DC2EA),
+                      textColor: Colors.white,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -129,19 +113,20 @@ class LocationCurvedContainer extends StatelessWidget {
     required this.height,
     this.color = Colors.white,
     this.textColor = Colors.black,
-    this.scoreColor,
-    required this.to,
-    required this.from,
+    required this.destination,
+    required this.origin,
     this.score,
     this.bottomBorder = true,
     this.date,
     this.reservationCode,
+    this.scoreColor,
   });
   final double height;
   final Color? color;
   final Color textColor;
   final Color? scoreColor;
-  final String to, from;
+
+  final String destination, origin;
   final int? score;
   final bool bottomBorder;
   final String? date;
@@ -171,13 +156,15 @@ class LocationCurvedContainer extends StatelessWidget {
           DefaultTextStyle(
             style: TextStyle(
               fontStyle: FontStyle.italic,
-              color: score != null && score == 0 ? failed : textColor,
+              color: textColor,
             ),
             child: Row(
               children: [
-                FromToWidget(
-                  start: false,
-                  name: to,
+                Expanded(
+                  child: FromToWidget(
+                    start: false,
+                    name: destination,
+                  ),
                 ),
                 if (score == null) const Spacer(),
                 Container(
@@ -187,10 +174,11 @@ class LocationCurvedContainer extends StatelessWidget {
                   color: const Color(0xffDDDDDD),
                 ),
                 if (score == null) const Spacer(),
-                FromToWidget(
-                  name: from,
+                Expanded(
+                  child: FromToWidget(
+                    name: origin,
+                  ),
                 ),
-                if (score != null) const Spacer(),
                 if (score != null)
                   Container(
                     width: 53.sp,
@@ -329,16 +317,24 @@ class FromToWidget extends StatelessWidget {
             style: titleStyle,
           ),
         ),
-        Opacity(
-          opacity: 0.7,
-          child: Text(
-            'Aeropuerto',
-            style: subtitleStyle,
-          ),
-        ),
-        Text(
-          name,
-          style: subtitleStyle,
+        // Opacity(
+        //   opacity: 0.7,
+        //   child: Text(
+        //     'Aeropuerto',
+        //     style: subtitleStyle,
+        //   ),
+        // ),
+        Row(
+          children: [
+            Expanded(
+              child: AutoSizeText(
+                name,
+                style: subtitleStyle,
+                // minFontSize: 12.sp,
+                maxLines: 2,
+              ),
+            ),
+          ],
         )
       ],
     );

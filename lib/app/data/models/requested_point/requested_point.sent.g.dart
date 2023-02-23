@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'requested_point.dart';
+part of 'requested_point.sent.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-RequestedPointsModel _$RequestedPointsModelFromJson(
+RequestedPointsModelSent _$RequestedPointsModelSentFromJson(
         Map<String, dynamic> json) =>
-    RequestedPointsModel(
+    RequestedPointsModelSent(
       reservationCode: json['reservation_code'] as String,
       travelDate: json['travel_date'] as String,
       airportOriginId: json['airport_origin_id'] as int,
@@ -16,8 +16,8 @@ RequestedPointsModel _$RequestedPointsModelFromJson(
       airlineId: json['airline_id'] as int,
     );
 
-Map<String, dynamic> _$RequestedPointsModelToJson(
-        RequestedPointsModel instance) =>
+Map<String, dynamic> _$RequestedPointsModelSentToJson(
+        RequestedPointsModelSent instance) =>
     <String, dynamic>{
       'reservation_code': instance.reservationCode,
       'travel_date': instance.travelDate,

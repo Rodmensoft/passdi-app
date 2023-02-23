@@ -27,8 +27,8 @@ class ScoreDetailPage extends StatelessWidget {
               LocationCurvedContainer(
                 height: 260.sp,
                 textColor: Colors.black.withOpacity(0.7),
-                to: 'Rodríguez Ballón',
-                from: 'Intl Jorge Chávez',
+                destination: 'Rodríguez Ballón',
+                origin: 'Intl Jorge Chávez',
                 bottomBorder: true,
                 date: '01/02/2022',
                 reservationCode: 'F4GHDAASD',
