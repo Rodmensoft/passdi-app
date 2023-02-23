@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:passdi_app/app/data/services/shared_preferences.service.dart';
+import 'package:passdi_app/app/ui/pages/home_page/controllers/home_controller.dart';
 import 'package:passdi_app/utils/size_box_int.dart';
 
 import '../../../../utils/colors.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeController controller = Get.find();
     return SafeArea(
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -214,6 +214,23 @@ class ProfileForm extends StatelessWidget {
                       ),
                     ),
                   ),
+                  10.heightSP,
+                  AppButton(
+                    height: 40.sp,
+                    width: 225.sp,
+                    color: failed,
+                    onTap: () {
+                      controller.logout();
+                    },
+                    child: Text(
+                      'Cerrar sesión'.toUpperCase(),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                   20.heightSP,
                 ],
               ),

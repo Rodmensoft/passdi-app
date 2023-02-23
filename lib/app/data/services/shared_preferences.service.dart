@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:get/route_manager.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:passdi_app/app/data/models/auth/auth.model.dart';
 import 'package:passdi_app/app/data/models/several_data/several_data.model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../routes/app_routes.dart';
 
 class Prefs {
   static final Prefs _instancia = Prefs._internal();
@@ -20,7 +23,6 @@ class Prefs {
 
   String get authDataString => _prefs.getString('authData') ?? '';
   set authDataString(String value) => _prefs.setString('authData', value);
-
   Auth get authData {
     return authFromJson(authDataString);
   }
@@ -34,4 +36,11 @@ class Prefs {
 
   Future<SharedPreferences> initPrefs() async =>
       _prefs = await SharedPreferences.getInstance();
+
+  Future<void> logout() async {
+    final String severalDataTemp = severalDataString;
+    clear();
+    severalDataString = severalDataTemp;
+    await Get.offAndToNamed(AppRoutes.AUTH);
+  }
 }

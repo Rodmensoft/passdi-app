@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:passdi_app/app/data/services/points.service.dart';
 import 'package:passdi_app/app/data/services/shared_preferences.service.dart';
 import 'package:passdi_app/app/routes/app_routes.dart';
 
@@ -38,7 +37,6 @@ class SplashController extends GetxController {
       Get.offAllNamed(AppRoutes.ONBOARDING);
       return;
     }
-    await getUserInitSettings();
 
     await Get.offAllNamed(AppRoutes.BOTTOM);
   }
@@ -46,10 +44,5 @@ class SplashController extends GetxController {
   Future<void> getSeveralData() async {
     final SeveralDataService service = Get.find();
     ApiResponse response = await service.getSeveralData();
-  }
-
-  getUserInitSettings() async {
-    PointsService service = Get.find();
-    await service.getPoints();
   }
 }

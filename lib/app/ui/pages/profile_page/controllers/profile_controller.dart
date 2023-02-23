@@ -79,4 +79,8 @@ class ProfileController extends GetxController {
       customedAlertDialog(response.message);
     }
   }
+
+  Future<void> logout() async {
+    await prefs.logout();
+  }
 }
