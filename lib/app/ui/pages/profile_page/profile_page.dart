@@ -4,6 +4,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:passdi_app/app/constants/civil_states.dart';
 import 'package:passdi_app/app/data/services/shared_preferences.service.dart';
 import 'package:passdi_app/app/ui/global_widgets/custom_dropdown.dart';
+import 'package:passdi_app/app/ui/global_widgets/custom_search_select_dialog.dart';
 import 'package:passdi_app/utils/size_box_int.dart';
 
 import './controllers/profile_controller.dart';
@@ -127,13 +128,32 @@ class ProfileForm extends StatelessWidget {
                       hintText: 'Número de Documento',
                     ),
                   ),
-                  Obx(() => CustomDropdownButton(
-                        value: controller.nationalityId.value,
-                        items: prefs.severalData!.nationality,
-                        onChanged: (value) {
-                          controller.nationalityId.value = value;
+                  Obx(() => GestureDetector(
+                        onTap: () {
+                          Get.dialog(
+                            SearchSelectDialog(
+                              items: prefs.severalData!.nationality,
+                              selectedItemId: controller.nationalityId.value,
+                              onChanged: (value) async {
+                                controller.nationalityId.value = value;
+                                await Future.delayed(
+                                    const Duration(milliseconds: 300));
+                                controller.formKey.currentState?.validate();
+                              },
+                            ),
+                          );
                         },
-                        hintText: 'Nacionalidad',
+                        child: Container(
+                          color: Colors.transparent,
+                          child: IgnorePointer(
+                            child: CustomDropdownButton(
+                              value: controller.nationalityId.value,
+                              items: prefs.severalData!.nationality,
+                              onChanged: (value) {},
+                              hintText: 'Nacionalidad',
+                            ),
+                          ),
+                        ),
                       )),
                   GestureDetector(
                     onTap: () async {

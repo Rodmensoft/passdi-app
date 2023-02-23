@@ -1,12 +1,13 @@
-import 'package:passdi_app/app/ui/pages/register_page/controllers/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:passdi_app/app/ui/pages/register_page/controllers/register_controller.dart';
 
 import '../../../../../utils/date_picker.dart';
 import '../../../../../utils/format_date.dart';
 import '../../../../constants/civil_states.dart';
 import '../../../global_widgets/custom_dropdown.dart';
+import '../../../global_widgets/custom_search_select_dialog.dart';
 
 class FormStep1 extends StatelessWidget {
   const FormStep1({
@@ -144,13 +145,32 @@ class FormStep3 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Obx(
-                () => CustomDropdownButton(
-                  value: controller.nationalityId.value,
-                  items: controller.products,
-                  hintText: 'Nacionalidad',
-                  onChanged: (value) {
-                    controller.nationalityId.value = value;
+                () => GestureDetector(
+                  onTap: () async {
+                    await Get.dialog(
+                      SearchSelectDialog(
+                        items: controller.products,
+                        selectedItemId: controller.nationalityId.value,
+                        onChanged: (value) async {
+                          controller.nationalityId.value = value;
+                          await Future.delayed(
+                              const Duration(milliseconds: 300));
+                          controller.formKeyStep3.currentState?.validate();
+                        },
+                      ),
+                    );
                   },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: IgnorePointer(
+                      child: CustomDropdownButton(
+                        value: controller.nationalityId.value,
+                        items: controller.products,
+                        hintText: 'Nacionalidad',
+                        onChanged: (value) {},
+                      ),
+                    ),
+                  ),
                 ),
               ),
               Obx(
