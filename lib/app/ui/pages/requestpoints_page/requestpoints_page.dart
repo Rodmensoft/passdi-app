@@ -11,6 +11,7 @@ import '../../../../utils/colors.dart';
 import '../../../../utils/date_picker.dart';
 import '../../../../utils/format_date.dart';
 import '../../global_widgets/custom_dropdown.dart';
+import '../../global_widgets/custom_search_select_dialog.dart';
 
 export './bindings/requestpoints_binding.dart';
 
@@ -90,39 +91,111 @@ class RequestPointsPage extends StatelessWidget {
                                 ),
                               ),
                               Obx(
-                                () => CustomDropdownButton(
-                                  value: controller.origin.value,
-                                  items: prefs.severalData!.airports,
-                                  onChanged: (value) {
-                                    if (value != null) {
-                                      controller.origin.value = value;
-                                    }
+                                () => GestureDetector(
+                                  onTap: () {
+                                    Get.dialog(
+                                      SearchSelectDialog(
+                                        items: prefs.severalData!.airports,
+                                        selectedItemId: controller.origin.value,
+                                        onChanged: (value) async {
+                                          if (value != null) {
+                                            controller.origin.value = value;
+                                          }
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 300));
+                                          controller.formKey.currentState
+                                              ?.validate();
+                                        },
+                                      ),
+                                    );
                                   },
-                                  hintText: 'Aeropuerto de Origen',
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    child: IgnorePointer(
+                                      child: CustomDropdownButton(
+                                        value: controller.origin.value,
+                                        items: prefs.severalData!.airports,
+                                        onChanged: (value) {},
+                                        hintText: 'Aeropuerto de Origen',
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                               Obx(
-                                () => CustomDropdownButton(
-                                  value: controller.destination.value,
-                                  items: prefs.severalData!.airports,
-                                  onChanged: (value) {
-                                    if (value != null) {
-                                      controller.destination.value = value;
-                                    }
+                                () => GestureDetector(
+                                  onTap: () {
+                                    Get.dialog(
+                                      SearchSelectDialog(
+                                        items: prefs.severalData!.airports,
+                                        selectedItemId:
+                                            controller.destination.value,
+                                        onChanged: (value) async {
+                                          if (value != null) {
+                                            controller.destination.value =
+                                                value;
+                                          }
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 300));
+                                          controller.formKey.currentState
+                                              ?.validate();
+                                        },
+                                      ),
+                                    );
                                   },
-                                  hintText: 'Aeropuerto de Destino',
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    child: IgnorePointer(
+                                      child: CustomDropdownButton(
+                                        value: controller.destination.value,
+                                        items: prefs.severalData!.airports,
+                                        onChanged: (value) {
+                                          if (value != null) {
+                                            controller.destination.value =
+                                                value;
+                                          }
+                                        },
+                                        hintText: 'Aeropuerto de Destino',
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                               Obx(
-                                () => CustomDropdownButton(
-                                  value: controller.airline.value,
-                                  items: prefs.severalData!.airlines,
-                                  onChanged: (value) {
-                                    if (value != null) {
-                                      controller.airline.value = value;
-                                    }
+                                () => GestureDetector(
+                                  onTap: () {
+                                    Get.dialog(
+                                      SearchSelectDialog(
+                                        items: prefs.severalData!.airlines,
+                                        selectedItemId:
+                                            controller.airline.value,
+                                        onChanged: (value) async {
+                                          if (value != null) {
+                                            controller.airline.value = value;
+                                          }
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 300));
+                                          controller.formKey.currentState
+                                              ?.validate();
+                                        },
+                                      ),
+                                    );
                                   },
-                                  hintText: 'Aeropuerto de Origen',
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    child: IgnorePointer(
+                                      child: CustomDropdownButton(
+                                        value: controller.airline.value,
+                                        items: prefs.severalData!.airlines,
+                                        onChanged: (value) {
+                                          if (value != null) {
+                                            controller.airline.value = value;
+                                          }
+                                        },
+                                        hintText: 'Aerolínea',
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                               20.heightSP,
