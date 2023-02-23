@@ -57,4 +57,7 @@ class User {
   String get documentType => severalData.documentTypes
       .firstWhere((element) => element.id == documentTypeId)
       .name;
+  String get nationality => severalData.nationality
+      .firstWhere((element) => element.id == nationalityId)
+      .name;
 }

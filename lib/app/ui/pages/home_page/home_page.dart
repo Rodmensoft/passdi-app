@@ -87,7 +87,7 @@ class UserStatsCurvedContainer extends StatelessWidget {
           children: <Widget>[
             const InfoContainer(
               title: 'Likes',
-              value: 125,
+              value: 0,
             ),
             Container(
               height: 40.sp,
@@ -96,7 +96,7 @@ class UserStatsCurvedContainer extends StatelessWidget {
             ),
             const InfoContainer(
               title: 'Siguiendo',
-              value: 150,
+              value: 0,
             ),
             Container(
               height: 40.sp,
@@ -105,7 +105,7 @@ class UserStatsCurvedContainer extends StatelessWidget {
             ),
             const InfoContainer(
               title: 'Seguidores',
-              value: 21,
+              value: 0,
             ),
           ],
         ),
@@ -159,7 +159,7 @@ class ProfileCurvedContainer extends StatelessWidget {
                       maxLines: 1,
                     ),
                     Text(
-                      'Lorem ipsum',
+                      prefs.authData.user.nationality,
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 14.sp,
@@ -192,6 +192,8 @@ class ScoreCurvedContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final Prefs prefs = Get.find();
+
     return Container(
       decoration: BoxDecoration(
         color: color,
@@ -228,7 +230,7 @@ class ScoreCurvedContainer extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: 'Tienes 25 puntos acumulados',
+                      text: 'Tienes ${0} puntos acumulados',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 12.sp,

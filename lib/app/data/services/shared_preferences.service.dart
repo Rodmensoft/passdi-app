@@ -25,6 +25,9 @@ class Prefs {
     return authFromJson(authDataString);
   }
 
+  int get userNumberPoints => _prefs.getInt('numberPoints') ?? 0;
+  set userNumberPoints(int value) => _prefs.setInt('numberPoints', value);
+
   Future<void> clear() async {
     await _prefs.clear();
   }

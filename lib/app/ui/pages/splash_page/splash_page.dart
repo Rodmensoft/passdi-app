@@ -13,7 +13,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SplashController controller = Get.find<SplashController>();
-    controller.init();
+    //  controller.onReady();
     return Scaffold(
       backgroundColor: Theme.of(context).copyWith().primaryColor,
       body: Center(

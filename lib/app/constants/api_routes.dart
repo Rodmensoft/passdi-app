@@ -8,4 +8,6 @@ class ApiRoutes {
   static const String updateProfile = 'updateProfile';
 
   static const String saveRequestedPoint = 'saveRequestedPoint';
+
+  static const String getPoints = 'getPoints';
 }
