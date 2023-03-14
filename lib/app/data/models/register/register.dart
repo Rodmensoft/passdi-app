@@ -16,6 +16,8 @@ class RegisterModel {
   int genderId;
   int civilStateId;
   String phone;
+  @JsonKey(includeIfNull: false)
+  int? profileVisible;
 
   RegisterModel({
     required this.name,
@@ -29,6 +31,7 @@ class RegisterModel {
     required this.genderId,
     required this.civilStateId,
     required this.phone,
+    this.profileVisible,
   });
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) =>

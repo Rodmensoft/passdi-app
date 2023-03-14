@@ -21,16 +21,13 @@ class HomePage extends StatelessWidget {
     final HomeController controller = Get.find();
     return SafeArea(
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(
             width: double.infinity,
             child: SafeArea(child: SizedBox()),
           ),
           Stack(
-            // alignment: Alignment.bottomCenter,
             children: const [
-              // UserStatsCurvedContainer(),
               ProfileCurvedContainer(),
               ScoreCurvedContainer(hasBorder: true),
             ],

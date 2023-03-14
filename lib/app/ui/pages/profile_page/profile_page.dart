@@ -102,15 +102,13 @@ class ProfileForm extends StatelessWidget {
                       hintText: 'Nombres y Apellidos',
                     ),
                   ),
-                  IgnorePointer(
-                    ignoring: true,
-                    child: AppTextField(
-                      controller: controller.emailCtrl,
-                      textFieldType: TextFieldType.EMAIL,
-                      decoration: InputDecoration(
-                        hintStyle: primaryTextStyle(color: Colors.black45),
-                        hintText: 'Email',
-                      ),
+                  AppTextField(
+                    readOnly: true,
+                    controller: controller.emailCtrl,
+                    textFieldType: TextFieldType.EMAIL,
+                    decoration: InputDecoration(
+                      hintStyle: primaryTextStyle(color: Colors.black45),
+                      hintText: 'Email',
                     ),
                   ),
                   Obx(() => CustomDropdownButton(
@@ -199,6 +197,22 @@ class ProfileForm extends StatelessWidget {
                         },
                         hintText: 'Ocupación',
                       )),
+                  Obx(
+                    () => CheckboxListTile(
+                      activeColor: accept,
+                      visualDensity: VisualDensity.comfortable,
+                      value: controller.profileVisible.value,
+                      dense: true,
+                      title: Text(
+                        'Visibilidad del usuario',
+                        style: primaryTextStyle(fontStyle: FontStyle.italic),
+                      ),
+                      controlAffinity: ListTileControlAffinity.trailing,
+                      onChanged: (bool? value) {
+                        controller.profileVisible.value = value!;
+                      },
+                    ),
+                  ),
                   47.heightSP,
                   AppButton(
                     height: 40.sp,

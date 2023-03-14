@@ -19,6 +19,7 @@ RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) =>
       genderId: json['gender_id'] as int,
       civilStateId: json['civil_state_id'] as int,
       phone: json['phone'] as String,
+      profileVisible: json['profile_visible'] as int?,
     );
 
 Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) {
@@ -42,5 +43,6 @@ Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) {
   val['gender_id'] = instance.genderId;
   val['civil_state_id'] = instance.civilStateId;
   val['phone'] = instance.phone;
+  writeNotNull('profile_visible', instance.profileVisible);
   return val;
 }

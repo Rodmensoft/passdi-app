@@ -28,6 +28,8 @@ class ProfileController extends GetxController {
 
   RxBool loading = false.obs;
 
+  RxBool profileVisible = false.obs;
+
   RegisterModel get updateModel => RegisterModel(
         name: nameCtrl.text,
         civilStateId: int.tryParse(civilStateId.value ?? '0') ?? 0,
@@ -39,6 +41,7 @@ class ProfileController extends GetxController {
         document: documentCtrl.text,
         email: emailCtrl.text,
         phone: prefs.authData.user.phone,
+        profileVisible: profileVisible.value ? 1 : 0,
       );
 
   @override
@@ -68,6 +71,7 @@ class ProfileController extends GetxController {
     nationalityId.value = prefs.authData.user.nationalityId.toString();
     civilStateId.value = prefs.authData.user.civilStateId.toString();
     occupationId.value = prefs.authData.user.occupationId.toString();
+    profileVisible.value = prefs.authData.user.profileVisible == 1;
   }
 
   updateUserData() async {
