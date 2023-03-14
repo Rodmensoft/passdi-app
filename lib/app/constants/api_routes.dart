@@ -12,4 +12,6 @@ class ApiRoutes {
   static const String getPoints = 'getPoints';
 
   static const String getAllRequestedPoints = 'getAllRequestedPoints';
+
+  static const String getTYC = 'getTYC';
 }

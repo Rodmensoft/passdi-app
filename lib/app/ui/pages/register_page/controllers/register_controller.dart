@@ -46,6 +46,8 @@ class RegisterController extends GetxController {
   Rx<String?> occupationId = (null as String?).obs;
   Rx<String?> civilStateId = (null as String?).obs;
 
+  RxBool termsConditions = false.obs;
+
   RegisterModel get registerModel => RegisterModel(
         birthDate: birthDate.text,
         document: document.text,
@@ -105,7 +107,14 @@ class RegisterController extends GetxController {
     if (currentStep.value == 3) {
       formKeyStep3HasChanged.value = true;
       if (formKeyStep3.currentState?.validate() ?? false) {
-        await registerUser();
+        if (termsConditions.value) {
+          await registerUser();
+          return;
+        }
+        toast(
+          'Acepta los términos y condiciones',
+          print: true,
+        );
       } else {
         return;
       }

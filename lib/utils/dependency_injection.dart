@@ -2,8 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 import '../app/data/provider/points.provider.dart';
+import '../app/data/provider/terms_conditions.provider.dart';
 import '../app/data/services/points.service.dart';
 import '../app/data/services/shared_preferences.service.dart';
+import '../app/data/services/terms_conditions.service.dart';
 import 'configs.dart';
 import 'dependency_export.dart';
 
@@ -23,6 +25,9 @@ class DependencyInjection {
 
     Get.put(PointsProvider());
     Get.put(PointsService());
+
+    Get.put(TermsConditionsProvider());
+    Get.put(TermsConditionsService());
   }
 
   static Future<void> initSharedPrefs() async {
