@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import './controllers/scoredetail_controller.dart';
-import '../home_page/home_page.dart';
+import '../../global_widgets/score_curved_container.dart';
 import '../score_page/score_page.dart';
 
 export './bindings/scoredetail_binding.dart';
@@ -33,9 +33,7 @@ class ScoreDetailPage extends StatelessWidget {
                 date: '01/02/2022',
                 reservationCode: 'F4GHDAASD',
               ),
-              const ScoreCurvedContainer(
-                hasBorder: true,
-              ),
+              const ScoreCurvedContainer(hasBorder: true),
               const SizedBox(
                 width: double.infinity,
                 child: SafeArea(child: SizedBox()),

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:passdi_app/utils/size_box_int.dart';
 
+import '../../global_widgets/score_curved_container.dart';
 import './controllers/users_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/common.dart';
-import '../home_page/home_page.dart';
 
 export './bindings/users_binding.dart';
 

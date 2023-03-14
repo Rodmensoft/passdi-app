@@ -10,7 +10,7 @@ import './controllers/score_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/common.dart';
 import '../../global_widgets/custom_cicular_progress_ind.dart';
-import '../home_page/home_page.dart';
+import '../../global_widgets/score_curved_container.dart';
 
 export './bindings/score_binding.dart';
 

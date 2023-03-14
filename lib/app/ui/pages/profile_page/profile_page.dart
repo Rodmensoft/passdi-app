@@ -12,7 +12,7 @@ import '../../../../utils/colors.dart';
 import '../../../../utils/date_picker.dart';
 import '../../../../utils/format_date.dart';
 import '../../global_widgets/custom_cicular_progress_ind.dart';
-import '../home_page/home_page.dart';
+import '../../global_widgets/score_curved_container.dart';
 
 export './bindings/profile_binding.dart';
 
@@ -49,9 +49,7 @@ class ProfilePage extends StatelessWidget {
               ),
               Stack(
                 children: const [
-                  ScoreCurvedContainer(
-                    hasBorder: true,
-                  ),
+                  ScoreCurvedContainer(hasBorder: true),
                 ],
               ),
             ],
