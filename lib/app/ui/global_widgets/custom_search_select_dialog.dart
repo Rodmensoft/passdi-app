@@ -35,8 +35,8 @@ class _SearchSelectDialogState extends State<SearchSelectDialog> {
             AppTextField(
               textFieldType: TextFieldType.NAME,
               decoration: InputDecoration(
-                hintText: widget.searchHintText ?? 'Buscar',
-              ),
+                  hintText: widget.searchHintText ?? 'Buscar',
+                  hintStyle: primaryTextStyle(color: Colors.black45)),
               onChanged: (String value) {
                 tempItems = widget.items.where(
                   (p0) {
@@ -61,7 +61,10 @@ class _SearchSelectDialogState extends State<SearchSelectDialog> {
                 title: Row(
                   children: [
                     Expanded(
-                      child: Text(item.name),
+                      child: Text(
+                        item.name,
+                        style: primaryTextStyle(fontStyle: FontStyle.italic),
+                      ),
                     ),
                   ],
                 ),

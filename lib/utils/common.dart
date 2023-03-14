@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'colors.dart';
@@ -60,10 +61,10 @@ List<LanguageDataModel> languageList() {
   ];
 }
 
-TextStyle defaultTextFieldStyle = TextStyle(
+TextStyle defaultTextFieldStyle = GoogleFonts.montserrat(
     fontWeight: FontWeight.w500, fontSize: 16.sp, fontStyle: FontStyle.italic);
 
-TextStyle defaultHintTextFieldStyle = TextStyle(
+TextStyle defaultHintTextFieldStyle = GoogleFonts.montserrat(
   fontWeight: FontWeight.w500,
   fontSize: 16.sp,
   color: Colors.black.withOpacity(0.32),

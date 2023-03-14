@@ -99,7 +99,8 @@ class ProfileForm extends StatelessWidget {
                   AppTextField(
                     controller: controller.nameCtrl,
                     textFieldType: TextFieldType.NAME,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      hintStyle: primaryTextStyle(color: Colors.black45),
                       hintText: 'Nombres y Apellidos',
                     ),
                   ),
@@ -108,7 +109,8 @@ class ProfileForm extends StatelessWidget {
                     child: AppTextField(
                       controller: controller.emailCtrl,
                       textFieldType: TextFieldType.EMAIL,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        hintStyle: primaryTextStyle(color: Colors.black45),
                         hintText: 'Email',
                       ),
                     ),
@@ -124,7 +126,8 @@ class ProfileForm extends StatelessWidget {
                   AppTextField(
                     controller: controller.documentCtrl,
                     textFieldType: TextFieldType.NAME,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      hintStyle: primaryTextStyle(color: Colors.black45),
                       hintText: 'Número de Documento',
                     ),
                   ),
@@ -174,7 +177,8 @@ class ProfileForm extends StatelessWidget {
                         child: AppTextField(
                           controller: controller.birthCtrl,
                           textFieldType: TextFieldType.NAME,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
+                            hintStyle: primaryTextStyle(color: Colors.black45),
                             hintText: 'Fecha de Nacimiento',
                           ),
                         ),

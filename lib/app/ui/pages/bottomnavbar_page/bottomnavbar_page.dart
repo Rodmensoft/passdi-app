@@ -1,6 +1,6 @@
-import 'package:passdi_app/utils/size_box_int.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:passdi_app/utils/size_box_int.dart';
 
 import './controllers/bottomnavbar_controller.dart';
 import '../../../../utils/colors.dart';

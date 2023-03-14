@@ -53,7 +53,9 @@ class RequestPointsPage extends StatelessWidget {
                               AppTextField(
                                 controller: controller.reservationCtrl,
                                 textFieldType: TextFieldType.NAME,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
+                                  hintStyle:
+                                      primaryTextStyle(color: Colors.black45),
                                   hintText: 'Código de Reserva',
                                 ),
                               ),
@@ -83,7 +85,9 @@ class RequestPointsPage extends StatelessWidget {
                                     child: AppTextField(
                                       controller: controller.travelDateCtrl,
                                       textFieldType: TextFieldType.NAME,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
+                                        hintStyle: primaryTextStyle(
+                                            color: Colors.black45),
                                         hintText: 'Fecha de Viaje',
                                       ),
                                     ),

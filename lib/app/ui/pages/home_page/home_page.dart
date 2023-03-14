@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:passdi_app/app/data/services/shared_preferences.service.dart';
 import 'package:passdi_app/app/ui/pages/home_page/controllers/home_controller.dart';
 import 'package:passdi_app/utils/size_box_int.dart';
@@ -147,7 +148,7 @@ class ProfileCurvedContainer extends StatelessWidget {
             10.widthSP,
             Expanded(
               child: DefaultTextStyle(
-                style: TextStyle(
+                style: GoogleFonts.montserrat(
                   fontWeight: FontWeight.bold,
                   fontSize: 24.sp,
                   color: Colors.black,
@@ -205,7 +206,7 @@ class ScoreCurvedContainer extends StatelessWidget {
       height: 93.sp,
       alignment: Alignment.center,
       child: SafeArea(
-        top: true,
+        top: false,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

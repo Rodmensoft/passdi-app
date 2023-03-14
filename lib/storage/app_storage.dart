@@ -32,7 +32,7 @@ abstract class AppStorageBase with Store {
     // errorMessage = languages!.pleaseTryAgain;
     // errorSomethingWentWrong = languages!.somethingWentWrong;
     errorThisFieldRequired = 'Este campo es requerido';
-
+    fontFamilyPrimaryGlobal = 'Montserrat';
     // errorInternetNotAvailable = languages!.internetNotAvailable;
   }
 }

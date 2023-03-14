@@ -1,9 +1,9 @@
-import 'package:passdi_app/utils/colors.dart';
-import 'package:passdi_app/utils/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:passdi_app/utils/colors.dart';
+import 'package:passdi_app/utils/common.dart';
 
 class AppTheme {
   //
@@ -20,11 +20,7 @@ class AppTheme {
             backgroundColor: Colors.white,
             mouseCursor: MaterialStateMouseCursor.clickable),
         iconTheme: const IconThemeData(color: appTextSecondaryColor),
-        textTheme: GoogleFonts.montserratTextTheme().copyWith(
-          titleMedium: defaultTextFieldStyle,
-          titleLarge: defaultTextFieldStyle,
-          titleSmall: defaultTextFieldStyle,
-        ),
+        textTheme: GoogleFonts.montserratTextTheme().copyWith(),
         dialogBackgroundColor: Colors.white,
         unselectedWidgetColor: primaryColor,
         textSelectionTheme: TextSelectionThemeData(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class CustomDropdownButton extends StatelessWidget {
   final String? value;
@@ -21,12 +22,10 @@ class CustomDropdownButton extends StatelessWidget {
       isDense: true,
       value: value,
       isExpanded: true,
-
-      hint: Opacity(
-        opacity: 0.5,
-        child: Text(
-          hintText,
-        ),
+      style: primaryTextStyle(fontStyle: FontStyle.italic),
+      hint: Text(
+        hintText,
+        style: primaryTextStyle(color: Colors.black45),
       ),
 
       validator: (value) {
@@ -39,7 +38,10 @@ class CustomDropdownButton extends StatelessWidget {
           .map(
             (dynamic e) => DropdownMenuItem<String?>(
               value: e.id.toString(),
-              child: Text(e.name),
+              child: Text(
+                e.name,
+                style: primaryTextStyle(fontStyle: FontStyle.italic),
+              ),
             ),
           )
           .toList(),
