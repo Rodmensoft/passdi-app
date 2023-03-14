@@ -1,6 +1,6 @@
-import 'package:passdi_app/app/assets/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:passdi_app/app/assets/assets.dart';
 
 class Logo extends StatelessWidget {
   const Logo({
@@ -23,7 +23,7 @@ class Logo extends StatelessWidget {
         width: size,
         height: size,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Colors.white,
           shape: BoxShape.circle,
           boxShadow: shadow
               ? [
