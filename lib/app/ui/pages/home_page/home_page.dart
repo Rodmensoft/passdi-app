@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
           Stack(
             // alignment: Alignment.bottomCenter,
             children: const [
-              UserStatsCurvedContainer(),
+              // UserStatsCurvedContainer(),
               ProfileCurvedContainer(),
               ScoreCurvedContainer(hasBorder: true),
             ],
