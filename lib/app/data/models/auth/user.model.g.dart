@@ -21,21 +21,35 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       nationalityId: json['nationality_id'] as int,
       civilStateId: json['civil_state_id'] as int,
       genderId: json['gender_id'] as int,
+      country: json['country'] as String?,
+      city: json['city'] as String?,
     );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'birth_date': instance.birthDate.toIso8601String(),
-      'document': instance.document,
-      'phone': instance.phone,
-      'email': instance.email,
-      'profile_visible': instance.profileVisible,
-      'notification': instance.notification,
-      'location': instance.location,
-      'occupation_id': instance.occupationId,
-      'document_type_id': instance.documentTypeId,
-      'nationality_id': instance.nationalityId,
-      'civil_state_id': instance.civilStateId,
-      'gender_id': instance.genderId,
-    };
+Map<String, dynamic> _$UserToJson(User instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'name': instance.name,
+    'birth_date': instance.birthDate.toIso8601String(),
+    'document': instance.document,
+    'phone': instance.phone,
+    'email': instance.email,
+    'profile_visible': instance.profileVisible,
+    'notification': instance.notification,
+    'location': instance.location,
+    'occupation_id': instance.occupationId,
+    'document_type_id': instance.documentTypeId,
+    'nationality_id': instance.nationalityId,
+    'civil_state_id': instance.civilStateId,
+    'gender_id': instance.genderId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('country', instance.country);
+  writeNotNull('city', instance.city);
+  return val;
+}

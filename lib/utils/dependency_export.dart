@@ -1,6 +1,15 @@
 export '../app/data/provider/auth.provider.dart';
+export '../app/data/provider/get_nearby_users.provider.dart';
+export '../app/data/provider/points.provider.dart';
 export '../app/data/provider/save_requested_point.provider.dart';
 export '../app/data/provider/several_data.provider.dart';
+export '../app/data/provider/terms_conditions.provider.dart';
+export '../app/data/provider/update_location_user.provider.dart';
 export '../app/data/services/auth.service.dart';
+export '../app/data/services/get_nearby_users.service.dart';
+export '../app/data/services/points.service.dart';
 export '../app/data/services/save_requested_point.service.dart';
 export '../app/data/services/several_data.service.dart';
+export '../app/data/services/shared_preferences.service.dart';
+export '../app/data/services/terms_conditions.service.dart';
+export '../app/data/services/update_location_user.service.dart';

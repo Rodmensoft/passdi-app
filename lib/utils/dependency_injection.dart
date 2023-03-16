@@ -1,11 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-import '../app/data/provider/points.provider.dart';
-import '../app/data/provider/terms_conditions.provider.dart';
-import '../app/data/services/points.service.dart';
-import '../app/data/services/shared_preferences.service.dart';
-import '../app/data/services/terms_conditions.service.dart';
+import '../app/data/services/geolocator.service.dart';
 import 'configs.dart';
 import 'dependency_export.dart';
 
@@ -13,6 +9,8 @@ class DependencyInjection {
   static Future<void> init() async {
     await initSharedPrefs();
     Get.put(Dio(BaseOptions(baseUrl: BASE_URL)));
+
+    Get.put(GeolocatorService());
 
     Get.put(SeveralDataProvider());
     Get.put(SeveralDataService());
@@ -28,6 +26,12 @@ class DependencyInjection {
 
     Get.put(TermsConditionsProvider());
     Get.put(TermsConditionsService());
+
+    Get.put(UpdateLocationProvider());
+    Get.put(UpdateLocationService());
+
+    Get.put(NearbyUsersProvider());
+    Get.put(NearbyUsersService());
   }
 
   static Future<void> initSharedPrefs() async {

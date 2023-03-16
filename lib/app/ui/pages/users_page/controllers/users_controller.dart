@@ -1,8 +1,11 @@
-import 'package:faker/faker.dart';
 import 'package:get/get.dart';
 
+import '../../../../data/models/auth/user.model.dart';
+import '../../../../data/services/get_nearby_users.service.dart';
+
 class UsersController extends GetxController {
-  final RxList<UsersModel> users = <UsersModel>[].obs;
+  final RxList<User> users = <User>[].obs;
+  int get usersLength => users.length;
 
   @override
   void onInit() {
@@ -14,7 +17,6 @@ class UsersController extends GetxController {
   void onReady() {
     // TODO: implement onReady
     super.onReady();
-    fillFakeUsers();
   }
 
   @override
@@ -23,16 +25,21 @@ class UsersController extends GetxController {
     super.onClose();
   }
 
-  fillFakeUsers() {
-    users.addAll(
-      List.generate(
-        10,
-        (index) => UsersModel(
-            name: Faker().person.name(),
-            country: 'Peruano',
-            image: 'https://picsum.photos/id/${index + 9}/300/300'),
-      ),
-    );
+  fillFakeUsers() async {
+    users.clear();
+    final NearbyUsersService service = Get.find();
+    var response = await service.getNearbyUsers();
+    users.value = response.data;
+    return;
+    // users.addAll(
+    //   List.generate(
+    //     10,
+    //     (index) => UsersModel(
+    //         name: Faker().person.name(),
+    //         country: 'Peruano',
+    //         image: 'https://picsum.photos/id/${index + 9}/300/300'),
+    //   ),
+    // );
   }
 }
 

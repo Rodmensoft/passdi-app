@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:passdi_app/utils/size_box_int.dart';
 
-import '../../global_widgets/score_curved_container.dart';
 import './controllers/users_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/common.dart';
+import '../../../data/models/auth/user.model.dart';
+import '../../global_widgets/score_curved_container.dart';
 
 export './bindings/users_binding.dart';
 
@@ -15,6 +16,7 @@ class UsersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final UsersController controller = Get.find();
     const color = Color(0xff4A4A4A);
+    controller.fillFakeUsers();
     return Column(
       children: [
         Container(
@@ -29,20 +31,20 @@ class UsersPage extends StatelessWidget {
                 width: double.infinity,
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      SafeArea(child: 229.heightSP),
-                      ...controller.users.asMap().entries.map((entry) {
-                        int index = entry.key;
-                        var user = entry.value;
-                        return UsersVerticalListContainer(
-                          index: index,
-                          user: user,
-                        );
-                      }),
-                      105.heightSP,
-                    ],
-                  ),
+                  child: Obx(() => Column(
+                        children: [
+                          SafeArea(child: 229.heightSP),
+                          ...controller.users.asMap().entries.map((entry) {
+                            int index = entry.key;
+                            var user = entry.value;
+                            return UsersVerticalListContainer(
+                              index: index,
+                              user: user,
+                            );
+                          }),
+                          105.heightSP,
+                        ],
+                      )),
                 ),
               ),
               Stack(
@@ -77,54 +79,53 @@ class UsersVerticalListContainer extends StatelessWidget {
   });
 
   final int index;
-  final UsersModel user;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 37.sp, vertical: 30.sp),
-      margin: EdgeInsets.only(bottom: 1.sp),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: curvedContainerBorderRadius,
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xffE7E4E9),
-              offset: Offset(-1.sp, 1.sp),
-            )
-          ]),
-      width: double.infinity,
-      height: 101.sp,
-      child: Row(
-        children: [
-          UserAvatar(image: user.image),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  user.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
-                    color: Colors.black,
+        padding: EdgeInsets.symmetric(horizontal: 37.sp, vertical: 30.sp),
+        margin: EdgeInsets.only(bottom: 1.sp),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: curvedContainerBorderRadius,
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xffE7E4E9),
+                offset: Offset(-1.sp, 1.sp),
+              )
+            ]),
+        width: double.infinity,
+        height: 101.sp,
+        child: Row(
+          children: [
+            const UserAvatar(image: 'https://picsum.photos/id/1/300/300'),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    user.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14.sp,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                Text(
-                  user.country,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontSize: 12.sp,
-                    color: Colors.black.withOpacity(0.6),
+                  Text(
+                    user.country ?? '',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12.sp,
+                      color: Colors.black.withOpacity(0.6),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }
 
@@ -149,14 +150,14 @@ class UsersCurvedBlackContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             20.heightSP,
-            Text(
-              '6 personas en tu misma ubicación',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 10.sp,
-                color: Colors.white,
-              ),
-            ),
+            Obx(() => Text(
+                  '${controller.usersLength} personas en tu misma ubicación',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 10.sp,
+                    color: Colors.white,
+                  ),
+                )),
             20.heightSP,
             UsersListHorizontal(
               users: controller.users,
@@ -174,7 +175,7 @@ class UsersListHorizontal extends StatelessWidget {
     super.key,
     required this.users,
   });
-  final RxList<UsersModel> users;
+  final RxList<User> users;
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +194,8 @@ class UsersListHorizontal extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    UserAvatar(image: user.image),
+                    const UserAvatar(
+                        image: 'https://picsum.photos/id/1/300/300'),
                     5.heightSP,
                     SizedBox(
                       width: 40,

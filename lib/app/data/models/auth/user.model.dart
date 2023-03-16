@@ -32,6 +32,8 @@ class User {
     required this.nationalityId,
     required this.civilStateId,
     required this.genderId,
+    this.country,
+    this.city,
   });
 
   int id;
@@ -48,6 +50,10 @@ class User {
   int nationalityId;
   int civilStateId;
   int genderId;
+  @JsonKey(includeIfNull: false)
+  String? country;
+  @JsonKey(includeIfNull: false)
+  String? city;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
