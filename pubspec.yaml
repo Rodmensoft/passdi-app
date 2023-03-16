@@ -24,10 +24,15 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.6.1
   font_awesome_flutter: ^10.3.0
+  geocoding: ^2.1.0
+  geolocator: ^9.0.2
   get: ^4.6.5
   google_fonts: ^4.0.1
+  google_maps_flutter: ^2.2.5
   json_annotation: ^4.8.0
   nb_utils: ^5.0.4
+  permission_handler: ^10.2.0
+  search_map_place_updated: ^0.0.4
   shared_preferences: ^2.0.17
   url_launcher: ^6.1.10
 

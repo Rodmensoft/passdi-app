@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PASSDI</string>
+    <!-- FACEBOOK SETTINGS -->
+    <string name="facebook_app_id">326833709319513</string>
+    <string name="facebook_client_token">26e9c4a34cc584e9b1f487cdc9f1390a</string>
+    <string name="fb_login_protocol_scheme">fb326833709319513</string>
+    <!-- GOOGLE SETTINGS -->
+    <string name="google_map_key">AIzaSyDXoLtHhTfSbbECk91kqNL8l3Dtof1GKd8</string>
+</resources>

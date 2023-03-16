@@ -14,4 +14,8 @@ class ApiRoutes {
   static const String getAllRequestedPoints = 'getAllRequestedPoints';
 
   static const String getTYC = 'getTYC';
+
+  static const String updateLocationUser = 'updateLocationUser';
+
+  static const String getNearbyUsers = 'getNearbyUsers';
 }
